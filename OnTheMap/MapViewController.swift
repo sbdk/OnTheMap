@@ -14,10 +14,76 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var appDelegate: AppDelegate!
+    var session: NSURLSession!
+    
+    var persons: [OTMPerson] = [OTMPerson]()
+    var studentInfo: [[String : AnyObject]] = [[String : AnyObject]]()
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?limit=100")!)
+        request.HTTPMethod = "GET"
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            
+            if error != nil {
+                print("There was an error with your request: \(error)")
+                return
+            }
+            
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                } else {
+                    print("Your request returned an invalid response!")
+                }
+                return
+            }
+            
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            } catch {
+                parsedResult = nil
+                print("Could not parse the data as JSON: '\(data)'")
+                return
+            }
+            
+            guard let results = parsedResult["results"] as? [[String : AnyObject]] else {
+                print("Cannot find key 'results' in \(parsedResult)")
+                return
+            }
+            
+            print("\(results)")
+            self.persons = OTMPerson.personsFromResults(results)
+            self.appDelegate.sharedPersonsInfo = self.persons
+            self.studentInfo = results
+            dispatch_async(dispatch_get_main_queue()) {
+                //self.mapView.reloadInputViews()
+            }
+        }
+        task.resume()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let locations = hardCodedLocationData()
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        session = NSURLSession.sharedSession()
+        
+        let locations = studentInfo
         
         var annotations = [MKPointAnnotation]()
         
@@ -40,7 +106,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.mapView.addAnnotations(annotations)
     }
-    
+
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
@@ -69,6 +135,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
+    
+    @IBAction func logoutButtonTouch(sender: AnyObject) {
+        
+        OTMFunctions().logoutUdacitySession()
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+            self.presentViewController(controller, animated: true, completion: nil)
+        })
+    }
+    
     
     func hardCodedLocationData() -> [[String : AnyObject]] {
         return  [
