@@ -1,16 +1,16 @@
 //
-//  OTMClient.swift
+//  OTMConvenience.swift
 //  OnTheMap
 //
-//  Created by Li Yin on 1/26/16.
+//  Created by Li Yin on 1/28/16.
 //  Copyright © 2016 Li Yin. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Foundation
 
-class OTMFunctions: UIViewController {
-
+extension OTMClient {
+    
     func logoutUdacitySession() {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
@@ -33,6 +33,6 @@ class OTMFunctions: UIViewController {
         }
         
         task.resume()
-    }
+    }   
 
 }

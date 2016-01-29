@@ -412,10 +412,10 @@
             </objects>
             <point key="canvasLocation" x="174" y="56"/>
         </scene>
-        <!--View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="hJO-YK-Lqu">
             <objects>
-                <viewController id="4Md-f0-WzT" sceneMemberID="viewController">
+                <viewController id="4Md-f0-WzT" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvt-1A-ORw"/>
                         <viewControllerLayoutGuide type="bottom" id="nhc-oF-EOc"/>
@@ -423,10 +423,65 @@
                     <view key="view" contentMode="scaleToFill" id="Glx-K6-YhT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="0.0" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GdJ-EO-Dq8">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PersonsTableViewCell" id="itX-jT-uZh">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="itX-jT-uZh" id="hU5-rD-jws">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="4Md-f0-WzT" id="OCt-o5-RcR"/>
+                                    <outlet property="delegate" destination="4Md-f0-WzT" id="Alj-6K-TJ0"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GdJ-EO-Dq8" firstAttribute="leading" secondItem="Glx-K6-YhT" secondAttribute="leading" id="2f8-E8-UwK"/>
+                            <constraint firstItem="GdJ-EO-Dq8" firstAttribute="top" secondItem="vvt-1A-ORw" secondAttribute="bottom" constant="-50" id="Dro-LL-pRv"/>
+                            <constraint firstItem="nhc-oF-EOc" firstAttribute="top" secondItem="GdJ-EO-Dq8" secondAttribute="bottom" id="Psi-p9-6oY"/>
+                            <constraint firstAttribute="trailing" secondItem="GdJ-EO-Dq8" secondAttribute="trailing" id="xX9-ko-O4D"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="GdJ-EO-Dq8"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2f8-E8-UwK"/>
+                                <exclude reference="Dro-LL-pRv"/>
+                                <exclude reference="xX9-ko-O4D"/>
+                                <exclude reference="Psi-p9-6oY"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="GdJ-EO-Dq8"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2f8-E8-UwK"/>
+                                <include reference="Dro-LL-pRv"/>
+                                <include reference="xX9-ko-O4D"/>
+                                <include reference="Psi-p9-6oY"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="jVu-6n-MMK"/>
+                    <navigationItem key="navigationItem" id="jVu-6n-MMK">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="y2R-YK-HpR">
+                            <connections>
+                                <action selector="logoutButtonTouch:" destination="4Md-f0-WzT" id="8wV-7H-kYI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="personsTableView" destination="GdJ-EO-Dq8" id="3fK-g1-gvL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHJ-Ch-O7K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE4345E01C5ABE8D00852B8E /* OTMConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4345DF1C5ABE8D00852B8E /* OTMConvenience.swift */; };
 		BEED772B1C5812EA005F6FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */; };
 		BEED772D1C5812EA005F6FA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED772C1C5812EA005F6FA7 /* ViewController.swift */; };
 		BEED77301C5812EA005F6FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEED772E1C5812EA005F6FA7 /* Main.storyboard */; };
@@ -19,7 +20,7 @@
 		BEED77601C5816AF005F6FA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED775F1C5816AF005F6FA7 /* LoginViewController.swift */; };
 		BEED77621C5816C1005F6FA7 /* InfoPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED77611C5816C1005F6FA7 /* InfoPostingViewController.swift */; };
 		BEED77641C583E5D005F6FA7 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED77631C583E5D005F6FA7 /* OTMConstants.swift */; };
-		BEED77661C583E8E005F6FA7 /* OTMFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED77651C583E8E005F6FA7 /* OTMFunctions.swift */; };
+		BEED77661C583E8E005F6FA7 /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED77651C583E8E005F6FA7 /* OTMClient.swift */; };
 		BEED77681C584090005F6FA7 /* OTMPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED77671C584090005F6FA7 /* OTMPerson.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE4345DF1C5ABE8D00852B8E /* OTMConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConvenience.swift; sourceTree = "<group>"; };
 		BEED77271C5812EA005F6FA7 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEED772C1C5812EA005F6FA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,7 +61,7 @@
 		BEED775F1C5816AF005F6FA7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEED77611C5816C1005F6FA7 /* InfoPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPostingViewController.swift; sourceTree = "<group>"; };
 		BEED77631C583E5D005F6FA7 /* OTMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
-		BEED77651C583E8E005F6FA7 /* OTMFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMFunctions.swift; sourceTree = "<group>"; };
+		BEED77651C583E8E005F6FA7 /* OTMClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
 		BEED77671C584090005F6FA7 /* OTMPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMPerson.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				BEED77631C583E5D005F6FA7 /* OTMConstants.swift */,
-				BEED77651C583E8E005F6FA7 /* OTMFunctions.swift */,
+				BE4345DF1C5ABE8D00852B8E /* OTMConvenience.swift */,
+				BEED77651C583E8E005F6FA7 /* OTMClient.swift */,
 				BEED77671C584090005F6FA7 /* OTMPerson.swift */,
 			);
 			name = Model;
@@ -293,8 +296,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4345E01C5ABE8D00852B8E /* OTMConvenience.swift in Sources */,
 				BEED772D1C5812EA005F6FA7 /* ViewController.swift in Sources */,
-				BEED77661C583E8E005F6FA7 /* OTMFunctions.swift in Sources */,
+				BEED77661C583E8E005F6FA7 /* OTMClient.swift in Sources */,
 				BEED775C1C581688005F6FA7 /* MapViewController.swift in Sources */,
 				BEED77681C584090005F6FA7 /* OTMPerson.swift in Sources */,
 				BEED77641C583E5D005F6FA7 /* OTMConstants.swift in Sources */,

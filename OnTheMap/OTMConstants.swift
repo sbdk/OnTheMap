@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension AppDelegate {
+extension OTMClient {
     
     
     struct Constants {
@@ -29,17 +29,17 @@ extension AppDelegate {
         static let ParseUpdateLocation = "https://api.parse.com/1/classes/StudentLocation/<objectId>"
     }
     
-    struct ParseResponseKeys {
+    struct JSONResponseKeys {
         
-        static let objectId = "objectId"
-        static let uniqueKey = "uniqueKey"
+        static let createdAt = "createdAt"
         static let firstName = "firstName"
         static let lastName = "lastName"
-        static let mapString = "mapString"
-        static let mediaURL = "mediaURL"
         static let latitude = "latitude"
         static let longitude = "longitude"
-        static let createdAt = "createdAt"
+        static let mapString = "mapString"
+        static let mediaURL = "mediaURL"
+        static let objectId = "objectId"
+        static let uniqueKey = "uniqueKey"
         static let updatedAt = "updatedAt"
     }
     
