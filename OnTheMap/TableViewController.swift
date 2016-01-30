@@ -72,17 +72,43 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func logoutButtonTouch(sender: AnyObject) {
         
-        OTMClient().logoutUdacitySession()
-        
-        dispatch_async(dispatch_get_main_queue()) {
+        OTMClient().logoutUdacitySession(self) {(success, errorString) in
             
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-            self.presentViewController(controller, animated: true, completion: nil)
+            if success {
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+                    //self.presentViewController(controller, animated: true, completion: nil)
+                    
+                }
+            }
+            
         }
 
-        
     }
     
+    @IBAction func refreshButtonTouch(sender: AnyObject) {
+        
+        OTMClient.sharedInstance().getStudentLocations{(success, results, errorString) in
+            
+            if results != nil{
+                dispatch_async(dispatch_get_main_queue()){
+                    self.persons = OTMPerson.personsFromResults(results!)
+                    self.personsTableView.reloadData()
+                    print("reload data finish")
+                }
+                
+                
+            } else {
+                
+                print(errorString)
+            }
+            
+        }
+
+    }
 }
 
 

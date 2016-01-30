@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
+    @IBOutlet weak var loginActivityIndicatorView: UIActivityIndicatorView!
+
     
     var session: NSURLSession!
     var tapRecognizer: UITapGestureRecognizer? = nil
@@ -24,6 +26,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        loginActivityIndicatorView.hidden = true
+        loginActivityIndicatorView.hidesWhenStopped = true
         //subscribeToKeyboarNotifications()
         self.addKeyboardDismissRecognizer()
         self.subscribeToKeyboardNotifications()
@@ -63,9 +67,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         } else if passwordTextField.text!.isEmpty {
             OTMClient.sharedInstance().presentAlertView("Password can't be empty", hostView: self)
         } else {
+            loginActivityIndicatorView.hidden = false
+            loginActivityIndicatorView.startAnimating()
             
             OTMClient.sharedInstance().creatUdacitySession(emailTextField.text!, passwordText: passwordTextField.text!) {(success, accountID, errorString) in
                 
+                dispatch_async(dispatch_get_main_queue()){
+                    self.loginActivityIndicatorView.stopAnimating()
+                    //self.loginActivityView.hidden = true
+                }
+
                 if success {
                     
                     OTMClient.sharedInstance().udacityAccountID = accountID
@@ -73,12 +84,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.completeLogin()
                     
                 } else {
+                    
                     OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
                     print(errorString)
                 }
             }
         }
     
+    }
+    
+    @IBAction func udacitySignUpButtonTouch(sender: AnyObject) {
+        
+        let app = UIApplication.sharedApplication()
+        app.openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
+        
     }
     
     func completeLogin() {
