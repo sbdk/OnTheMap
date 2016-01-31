@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE4345E01C5ABE8D00852B8E /* OTMConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4345DF1C5ABE8D00852B8E /* OTMConvenience.swift */; };
+		BE4B92FF1C5DE6BB00EC9B38 /* KeyboardConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */; };
 		BEED772B1C5812EA005F6FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */; };
 		BEED772D1C5812EA005F6FA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED772C1C5812EA005F6FA7 /* ViewController.swift */; };
 		BEED77301C5812EA005F6FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEED772E1C5812EA005F6FA7 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		BE4345DF1C5ABE8D00852B8E /* OTMConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConvenience.swift; sourceTree = "<group>"; };
+		BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardConfigration.swift; sourceTree = "<group>"; };
 		BEED77271C5812EA005F6FA7 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEED772C1C5812EA005F6FA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				BE4345DF1C5ABE8D00852B8E /* OTMConvenience.swift */,
 				BEED77651C583E8E005F6FA7 /* OTMClient.swift */,
 				BEED77671C584090005F6FA7 /* OTMPerson.swift */,
+				BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				BEED772D1C5812EA005F6FA7 /* ViewController.swift in Sources */,
 				BEED77661C583E8E005F6FA7 /* OTMClient.swift in Sources */,
 				BEED775C1C581688005F6FA7 /* MapViewController.swift in Sources */,
+				BE4B92FF1C5DE6BB00EC9B38 /* KeyboardConfigration.swift in Sources */,
 				BEED77681C584090005F6FA7 /* OTMPerson.swift in Sources */,
 				BEED77641C583E5D005F6FA7 /* OTMConstants.swift in Sources */,
 				BEED772B1C5812EA005F6FA7 /* AppDelegate.swift in Sources */,

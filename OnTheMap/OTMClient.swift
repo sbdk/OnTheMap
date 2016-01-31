@@ -15,6 +15,9 @@ class OTMClient: NSObject {
     var session: NSURLSession
     var udacitySessionID: String? = nil
     var udacityAccountID: String? = nil
+    var udacityFirstName: String? = nil
+    var udacityLastName: String? = nil
+    
     
     var Persons: [OTMPerson] = [OTMPerson]()
     
@@ -32,6 +35,7 @@ class OTMClient: NSObject {
         return Singleton.sharedInstance
     }
     
+    //using Udacity API
     func creatUdacitySession(emailText: String?, passwordText: String?, completionHandler: (success: Bool, accountID: String?, errorString: String?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
@@ -97,8 +101,48 @@ class OTMClient: NSObject {
         }
         task.resume()
     }
-
     
+    func getStudentInfoFromUdacity(completionHandler: (success: Bool, result: [String : String?]?, errorString: String?) -> Void) {
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(udacityAccountID)")!)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil {
+                completionHandler(success: false, result: nil, errorString: "no user data returned from Uacity")
+                return
+            }
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
+            
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
+            /* 5. Parse the data */
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+                print("Fetch user data successful")
+            } catch {
+                parsedResult = nil
+                completionHandler(success: false, result: nil, errorString: "can't parse Udacity JSON data")
+                
+                print("Could not parse the data as JSON: '\(newData)'")
+                return
+            }
+            
+            guard let user = parsedResult["user"] as? [String:String?] else {
+                
+                completionHandler(success: false, result: nil, errorString: "User data is empty")
+                print("Cannot find account info \(parsedResult)")
+                return
+            }
+            
+            completionHandler(success: true, result: user, errorString: nil)
+            
+        }
+        task.resume()
+        
+    }
+
+    //using Parse API
     func getStudentLocations(completionHandler: (success: Bool, result: [[String : AnyObject]]?, errorString: String?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?limit=100")!)
@@ -155,20 +199,38 @@ class OTMClient: NSObject {
         
     }
     
+    func postStudentLocations(UdacityAccountID: String?, firstName: String?, lastName: String?, mapString: String?, mediaURL: String?, latitude: Double?, longitude: Double?, completionHandler: (success: Bool, result: [String : AnyObject]?, errorString: String?) -> Void) {
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.HTTPMethod = "POST"
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error…
+                return
+            }
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        }
+        task.resume()
+  
+    }
+    
+    
     func presentAlertView(errorString: String, hostView: UIViewController) {
         
         dispatch_async(dispatch_get_main_queue()) {
             
             let alertController = UIAlertController(title: "Error!", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {action in hostView.dismissViewControllerAnimated(true, completion: nil)
-            }
-            
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
             alertController.addAction(okAction)
             hostView.presentViewController(alertController, animated: true, completion: nil)
         }
-        
+   
     }
+    
     
     /*class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         

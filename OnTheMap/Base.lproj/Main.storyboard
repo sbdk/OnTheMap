@@ -233,8 +233,8 @@
                                 <exclude reference="OiR-rJ-uG6"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="OWk-ux-DFW"/>
-                                <exclude reference="wxe-jM-gbE"/>
+                                <exclude reference="pMW-1x-seX"/>
+                                <exclude reference="Bmh-H6-g4c"/>
                                 <exclude reference="URz-63-5dz"/>
                                 <exclude reference="UqG-la-3eo"/>
                                 <exclude reference="Wbc-fT-ZXn"/>
@@ -243,7 +243,9 @@
                                 <exclude reference="GAa-cY-NcN"/>
                                 <exclude reference="KZk-1L-PyX"/>
                                 <exclude reference="ft8-PE-Hun"/>
-                                <exclude reference="Bmh-H6-g4c"/>
+                                <exclude reference="acd-xR-rDW"/>
+                                <exclude reference="gjL-II-fW6"/>
+                                <exclude reference="vNW-2V-h2U"/>
                                 <exclude reference="4b2-W8-7ec"/>
                                 <exclude reference="5Mb-h9-KWL"/>
                                 <exclude reference="9om-eD-hEW"/>
@@ -253,10 +255,8 @@
                                 <exclude reference="JNG-fz-t1B"/>
                                 <exclude reference="Q9k-RV-pbd"/>
                                 <exclude reference="WyK-xW-P6d"/>
-                                <exclude reference="acd-xR-rDW"/>
-                                <exclude reference="gjL-II-fW6"/>
-                                <exclude reference="vNW-2V-h2U"/>
-                                <exclude reference="pMW-1x-seX"/>
+                                <exclude reference="OWk-ux-DFW"/>
+                                <exclude reference="wxe-jM-gbE"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -270,8 +270,8 @@
                                 <include reference="OiR-rJ-uG6"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="OWk-ux-DFW"/>
-                                <include reference="wxe-jM-gbE"/>
+                                <include reference="pMW-1x-seX"/>
+                                <include reference="Bmh-H6-g4c"/>
                                 <include reference="URz-63-5dz"/>
                                 <include reference="UqG-la-3eo"/>
                                 <include reference="Wbc-fT-ZXn"/>
@@ -280,7 +280,9 @@
                                 <include reference="GAa-cY-NcN"/>
                                 <include reference="KZk-1L-PyX"/>
                                 <include reference="ft8-PE-Hun"/>
-                                <include reference="Bmh-H6-g4c"/>
+                                <include reference="acd-xR-rDW"/>
+                                <include reference="gjL-II-fW6"/>
+                                <include reference="vNW-2V-h2U"/>
                                 <include reference="4b2-W8-7ec"/>
                                 <include reference="5Mb-h9-KWL"/>
                                 <include reference="9om-eD-hEW"/>
@@ -290,10 +292,8 @@
                                 <include reference="JNG-fz-t1B"/>
                                 <include reference="Q9k-RV-pbd"/>
                                 <include reference="WyK-xW-P6d"/>
-                                <include reference="acd-xR-rDW"/>
-                                <include reference="gjL-II-fW6"/>
-                                <include reference="vNW-2V-h2U"/>
-                                <include reference="pMW-1x-seX"/>
+                                <include reference="OWk-ux-DFW"/>
+                                <include reference="wxe-jM-gbE"/>
                             </mask>
                         </variation>
                     </view>
@@ -451,6 +451,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PersonsTableViewCell" id="itX-jT-uZh">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="itX-jT-uZh" id="hU5-rD-jws">
+                                            <rect key="frame" x="0.0" y="-0.5" width="240" height="0.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -473,10 +474,10 @@
                                 <exclude reference="GdJ-EO-Dq8"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Psi-p9-6oY"/>
                                 <exclude reference="2f8-E8-UwK"/>
                                 <exclude reference="Dro-LL-pRv"/>
                                 <exclude reference="xX9-ko-O4D"/>
-                                <exclude reference="Psi-p9-6oY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -484,10 +485,10 @@
                                 <include reference="GdJ-EO-Dq8"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Psi-p9-6oY"/>
                                 <include reference="2f8-E8-UwK"/>
                                 <include reference="Dro-LL-pRv"/>
                                 <include reference="xX9-ko-O4D"/>
-                                <include reference="Psi-p9-6oY"/>
                             </mask>
                         </variation>
                     </view>
@@ -524,6 +525,7 @@
                         <viewControllerLayoutGuide type="bottom" id="SPc-1O-bS5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qhz-y0-c3l">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mWa-Xf-fFz">
@@ -566,7 +568,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type in your location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b4F-8s-jXy">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type in your location here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b4F-8s-jXy">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="SaH-zc-oVc">
@@ -613,7 +615,7 @@
                                     <action selector="findOnTheMapButtonTouch:" destination="grG-HV-ClN" eventType="touchUpInside" id="nYE-O8-VuZ"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type in your URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Na-Ja-2E4">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Share your link here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Na-Ja-2E4">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="ddR-aW-Kg3">
@@ -657,6 +659,9 @@
                                     <action selector="sumbitButtonTouch:" destination="grG-HV-ClN" eventType="touchUpInside" id="r9h-oJ-wUg"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-T4-CLM">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -671,6 +676,7 @@
                             <constraint firstItem="OgX-eR-Blh" firstAttribute="top" secondItem="aUv-WR-QGT" secondAttribute="bottom" constant="40" id="ELG-4I-8gc">
                                 <variation key="heightClass=regular" constant="10"/>
                             </constraint>
+                            <constraint firstItem="6Oj-T4-CLM" firstAttribute="centerY" secondItem="Qhz-y0-c3l" secondAttribute="centerY" id="Gw2-B0-MoV"/>
                             <constraint firstItem="mWa-Xf-fFz" firstAttribute="top" secondItem="8Na-Ja-2E4" secondAttribute="bottom" constant="130" id="PDB-8R-a5d">
                                 <variation key="heightClass=regular" constant="100"/>
                             </constraint>
@@ -681,6 +687,7 @@
                             <constraint firstItem="b4F-8s-jXy" firstAttribute="top" secondItem="OgX-eR-Blh" secondAttribute="bottom" constant="60" id="tGz-ws-WE5">
                                 <variation key="heightClass=regular" constant="30"/>
                             </constraint>
+                            <constraint firstItem="6Oj-T4-CLM" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="ves-jY-MPg"/>
                             <constraint firstItem="mWa-Xf-fFz" firstAttribute="leading" secondItem="Qhz-y0-c3l" secondAttribute="leading" id="xM0-pP-tOI"/>
                             <constraint firstItem="b4F-8s-jXy" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="zpA-hG-sck"/>
                         </constraints>
@@ -692,6 +699,7 @@
                                 <exclude reference="L6R-UJ-wR8"/>
                                 <exclude reference="8Na-Ja-2E4"/>
                                 <exclude reference="NUA-mi-ZMg"/>
+                                <exclude reference="6Oj-T4-CLM"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="1mC-S7-8pB"/>
@@ -704,6 +712,8 @@
                                 <exclude reference="9OL-bF-bKR"/>
                                 <exclude reference="PDB-8R-a5d"/>
                                 <exclude reference="xM0-pP-tOI"/>
+                                <exclude reference="Gw2-B0-MoV"/>
+                                <exclude reference="ves-jY-MPg"/>
                                 <exclude reference="0QY-f4-mgc"/>
                                 <exclude reference="9qd-zo-fQ1"/>
                                 <exclude reference="XVr-mW-Nx1"/>
@@ -719,6 +729,7 @@
                                 <include reference="L6R-UJ-wR8"/>
                                 <include reference="8Na-Ja-2E4"/>
                                 <include reference="NUA-mi-ZMg"/>
+                                <include reference="6Oj-T4-CLM"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="1mC-S7-8pB"/>
@@ -731,6 +742,8 @@
                                 <include reference="9OL-bF-bKR"/>
                                 <include reference="PDB-8R-a5d"/>
                                 <include reference="xM0-pP-tOI"/>
+                                <include reference="Gw2-B0-MoV"/>
+                                <include reference="ves-jY-MPg"/>
                                 <include reference="0QY-f4-mgc"/>
                                 <include reference="9qd-zo-fQ1"/>
                                 <include reference="XVr-mW-Nx1"/>
@@ -742,6 +755,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="URLInputTextField" destination="8Na-Ja-2E4" id="TuZ-3Y-lBO"/>
+                        <outlet property="activityIndicator" destination="6Oj-T4-CLM" id="2J1-Ii-tcN"/>
                         <outlet property="addressInputTextField" destination="b4F-8s-jXy" id="M5G-9z-OiI"/>
                         <outlet property="findOnTheMapButton" destination="L6R-UJ-wR8" id="NRi-Mj-Gy7"/>
                         <outlet property="infoPostingMapView" destination="mWa-Xf-fFz" id="9Xd-JL-kmp"/>

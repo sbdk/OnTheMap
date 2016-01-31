@@ -74,15 +74,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 dispatch_async(dispatch_get_main_queue()){
                     self.loginActivityIndicatorView.stopAnimating()
-                    //self.loginActivityView.hidden = true
+                    self.passwordTextField.text = ""
                 }
 
                 if success {
                     
-                    OTMClient.sharedInstance().udacityAccountID = accountID
-                    print("get Udacity Account ID: \(accountID)")
-                    self.completeLogin()
+                    dispatch_async(dispatch_get_main_queue()){
+                        OTMClient.sharedInstance().udacityAccountID = accountID
+                        print("get Udacity Account ID: \(accountID)")
+                    }
                     
+                    OTMClient.sharedInstance().getStudentInfoFromUdacity{(success, result, errorString) in
+                        
+                        if success {
+                            dispatch_async(dispatch_get_main_queue()){
+                                OTMClient.sharedInstance().udacityFirstName = result!["first_name"]!
+                                OTMClient.sharedInstance().udacityLastName = result!["last_name"]!
+                            }
+                            print("get Udacity FirstName: \(result!["first_name"]!) and LastName:\(result!["last_name"]!)")
+                            self.completeLogin()
+                            
+                        } else {
+                            
+                            OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
+                        }
+                        
+                    }
+        
                 } else {
                     
                     OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
@@ -107,128 +125,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.presentViewController(controller, animated: true, completion: nil)
         })
     }
-}
-
-//keyboard configration
-extension LoginViewController {
-    
-    
-    
-    func addKeyboardDismissRecognizer() {
-        self.view.addGestureRecognizer(tapRecognizer!)
-    }
-    
-    func removeKeyboardDismissRecognizer() {
-        self.view.removeGestureRecognizer(tapRecognizer!)
-    }
-    
-    func handleSingleTap(recognizer: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
-    
-    func subscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    func unsubscribeToKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-    }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if keyboardAdjusted == false {
-            lastKeyboardOffset = getKeyboardHeight(notification) / 2
-            self.view.superview?.frame.origin.y -= lastKeyboardOffset
-            keyboardAdjusted = true
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        
-        if keyboardAdjusted == true {
-            self.view.superview?.frame.origin.y += lastKeyboardOffset
-            keyboardAdjusted = false
-        }
-    }
-    
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.CGRectValue().height
-    }
-    
-    func prepareTextField(textField: UITextField){
-        textField.delegate = self
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        
-        textField.clearsOnBeginEditing = false
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
-    
-    /*func prepareTextField(textField: UITextField){
-        textField.delegate = self
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        
-        textField.clearsOnBeginEditing = false
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if emailTextField.isFirstResponder() || passwordTextField.isFirstResponder() {
-            self.view.frame.origin.y = getKeyboardHeight(notification) * -1
-        }
-    }
-    
-    func keyboardWillHide(notifiction: NSNotification) {
-        
-        if emailTextField.isFirstResponder() || passwordTextField.isFirstResponder() {
-            self.view.frame.origin.y = 0
-        }
-        
-    }
-    
-    func dismissAnyVisibleKeyboards() {
-        if emailTextField.isFirstResponder() || passwordTextField.isFirstResponder() {
-            self.view.endEditing(true)
-        }
-        
-    }
-    
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat
-    {
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.CGRectValue().height
-    }
-
-    
-    func subscribeToKeyboarNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    func unsubscribeFromKeyboarNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:
-            UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name:
-            UIKeyboardWillHideNotification, object: nil)
-    }*/
-    
 }
 
 
