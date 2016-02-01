@@ -102,6 +102,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    @IBAction func pinButtonTouch(sender: AnyObject) {
+        
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController") as! InfoPostingViewController
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    
     func generateAnnotations(JSONResults: [[String : AnyObject]]) {
             
             for dictionary in JSONResults {

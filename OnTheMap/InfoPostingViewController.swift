@@ -13,13 +13,14 @@ import MapKit
 class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var infoPostingMapView: MKMapView!
-    
     @IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var addressInputTextField: UITextField!
     @IBOutlet weak var URLInputTextField: UITextField!
     @IBOutlet weak var findOnTheMapButton: UIButton!
     @IBOutlet weak var sumbitButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var session: NSURLSession!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,6 +44,7 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        session = NSURLSession.sharedSession()
         addressInputTextField.delegate = self
         URLInputTextField.delegate = self
     }
@@ -64,6 +66,10 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 self.findOnTheMapButton.hidden = true
                 self.sumbitButton.hidden = false
                 
+                OTMClient.sharedInstance().udacityUserLatitude = coordinate?.latitude
+                OTMClient.sharedInstance().udacityUserLongitude = coordinate?.longitude
+                OTMClient.sharedInstance().udacityUserMapString = self.addressInputTextField.text!
+                
                 //use geoCodeing result to genearte Annotation on MapView
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate!
@@ -79,6 +85,30 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
     }
 
     @IBAction func sumbitButtonTouch(sender: AnyObject) {
+        
+        if URLInputTextField.text!.isEmpty {
+            
+            OTMClient.sharedInstance().presentAlertView("Link can't be empty, please provide your link", hostView: self)
+            
+        } else {
+            
+            OTMClient.sharedInstance().postStudentLocations(URLInputTextField.text!){ (success, result, errorString) in
+                
+                
+                if success {
+                    
+                    OTMClient.sharedInstance().parseObjectId = result
+                    print("Post info sucessful, get Parse ObjectId: \(result)")
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    
+                } else {
+                    OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
+                }
+                
+                
+            }
+            
+        }
         
         
         

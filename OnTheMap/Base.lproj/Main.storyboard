@@ -420,7 +420,11 @@
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="JEW-PV-gDL"/>
-                            <barButtonItem image="pin" id="GZE-kQ-ghF"/>
+                            <barButtonItem image="pin" id="GZE-kQ-ghF">
+                                <connections>
+                                    <action selector="pinButtonTouch:" destination="nxJ-lJ-lyn" id="2iS-Vm-WUm"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -504,7 +508,11 @@
                                     <action selector="refreshButtonTouch:" destination="4Md-f0-WzT" id="lWj-O7-n6y"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="pin" id="FMj-Ju-jWF"/>
+                            <barButtonItem image="pin" id="FMj-Ju-jWF">
+                                <connections>
+                                    <action selector="pinButtonTouch:" destination="4Md-f0-WzT" id="26E-qQ-XRq"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -519,7 +527,7 @@
         <!--Info Posting View Controller-->
         <scene sceneID="Phb-hF-1Nf">
             <objects>
-                <viewController storyboardIdentifier="InfoPostingView" id="grG-HV-ClN" customClass="InfoPostingViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InfoPostingViewController" id="grG-HV-ClN" customClass="InfoPostingViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aUv-WR-QGT"/>
                         <viewControllerLayoutGuide type="bottom" id="SPc-1O-bS5"/>
@@ -702,23 +710,23 @@
                                 <exclude reference="6Oj-T4-CLM"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="XVr-mW-Nx1"/>
+                                <exclude reference="iyo-RC-75g"/>
+                                <exclude reference="o7R-Ut-W71"/>
+                                <exclude reference="Gw2-B0-MoV"/>
+                                <exclude reference="ves-jY-MPg"/>
                                 <exclude reference="1mC-S7-8pB"/>
                                 <exclude reference="jdr-nj-Zya"/>
-                                <exclude reference="9Mh-2B-ZiS"/>
-                                <exclude reference="ELG-4I-8gc"/>
                                 <exclude reference="tGz-ws-WE5"/>
                                 <exclude reference="zpA-hG-sck"/>
+                                <exclude reference="0QY-f4-mgc"/>
+                                <exclude reference="9qd-zo-fQ1"/>
+                                <exclude reference="9Mh-2B-ZiS"/>
+                                <exclude reference="ELG-4I-8gc"/>
                                 <exclude reference="0fD-1d-gng"/>
                                 <exclude reference="9OL-bF-bKR"/>
                                 <exclude reference="PDB-8R-a5d"/>
                                 <exclude reference="xM0-pP-tOI"/>
-                                <exclude reference="Gw2-B0-MoV"/>
-                                <exclude reference="ves-jY-MPg"/>
-                                <exclude reference="0QY-f4-mgc"/>
-                                <exclude reference="9qd-zo-fQ1"/>
-                                <exclude reference="XVr-mW-Nx1"/>
-                                <exclude reference="iyo-RC-75g"/>
-                                <exclude reference="o7R-Ut-W71"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -732,23 +740,23 @@
                                 <include reference="6Oj-T4-CLM"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="XVr-mW-Nx1"/>
+                                <include reference="iyo-RC-75g"/>
+                                <include reference="o7R-Ut-W71"/>
+                                <include reference="Gw2-B0-MoV"/>
+                                <include reference="ves-jY-MPg"/>
                                 <include reference="1mC-S7-8pB"/>
                                 <include reference="jdr-nj-Zya"/>
-                                <include reference="9Mh-2B-ZiS"/>
-                                <include reference="ELG-4I-8gc"/>
                                 <include reference="tGz-ws-WE5"/>
                                 <include reference="zpA-hG-sck"/>
+                                <include reference="0QY-f4-mgc"/>
+                                <include reference="9qd-zo-fQ1"/>
+                                <include reference="9Mh-2B-ZiS"/>
+                                <include reference="ELG-4I-8gc"/>
                                 <exclude reference="0fD-1d-gng"/>
                                 <include reference="9OL-bF-bKR"/>
                                 <include reference="PDB-8R-a5d"/>
                                 <include reference="xM0-pP-tOI"/>
-                                <include reference="Gw2-B0-MoV"/>
-                                <include reference="ves-jY-MPg"/>
-                                <include reference="0QY-f4-mgc"/>
-                                <include reference="9qd-zo-fQ1"/>
-                                <include reference="XVr-mW-Nx1"/>
-                                <include reference="iyo-RC-75g"/>
-                                <include reference="o7R-Ut-W71"/>
                             </mask>
                         </variation>
                     </view>

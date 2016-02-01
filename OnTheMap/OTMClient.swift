@@ -8,15 +8,21 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class OTMClient: NSObject {
     
     /* Shared session */
     var session: NSURLSession
     var udacitySessionID: String? = nil
-    var udacityAccountID: String? = nil
+    var udacityAccountID: String? = nil //5029538567
     var udacityFirstName: String? = nil
     var udacityLastName: String? = nil
+    var udacityUserLatitude: Double? = nil
+    var udacityUserLongitude: Double? = nil
+    var udacityUserMapString: String? = nil
+    var parseObjectId: String? = nil
+    
     
     
     var Persons: [OTMPerson] = [OTMPerson]()
@@ -47,7 +53,7 @@ class OTMClient: NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
             if error != nil {
-                
+                completionHandler(success: false, accountID: nil, errorString: "Invalid Request!")
                 return
             }
             
@@ -102,9 +108,9 @@ class OTMClient: NSObject {
         task.resume()
     }
     
-    func getStudentInfoFromUdacity(completionHandler: (success: Bool, result: [String : String?]?, errorString: String?) -> Void) {
+    func getStudentInfoFromUdacity(accountID: String, completionHandler: (success: Bool, result: [String : AnyObject]?, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(udacityAccountID)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(accountID)")!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
@@ -118,8 +124,8 @@ class OTMClient: NSObject {
             /* 5. Parse the data */
             let parsedResult: AnyObject!
             do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-                print("Fetch user data successful")
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments) as? NSDictionary
+                print("Parse returned user data successful")
             } catch {
                 parsedResult = nil
                 completionHandler(success: false, result: nil, errorString: "can't parse Udacity JSON data")
@@ -128,16 +134,49 @@ class OTMClient: NSObject {
                 return
             }
             
-            guard let user = parsedResult["user"] as? [String:String?] else {
+            //here comes the problem, fix it.
+            guard let userDict = parsedResult["user"] as? [String : AnyObject] else {
                 
                 completionHandler(success: false, result: nil, errorString: "User data is empty")
                 print("Cannot find account info \(parsedResult)")
                 return
             }
             
-            completionHandler(success: true, result: user, errorString: nil)
+            completionHandler(success: true, result: userDict, errorString: nil)
             
         }
+        task.resume()
+        
+    }
+    
+    func logoutUdacitySession(hostView: UIViewController, completionHandler: (success: Bool, errorString: String?) ->Void) {
+        
+        
+        //let controller = hostView.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        //hostView.presentViewController(controller, animated: true, completion: nil)
+        //hostView.dismissViewControllerAnimated(true, completion: nil)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+        request.HTTPMethod = "DELETE"
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil {
+                completionHandler(success: false, errorString: "error")
+                return
+            }
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            completionHandler(success: true, errorString: nil)
+        }
+        
         task.resume()
         
     }
@@ -199,21 +238,48 @@ class OTMClient: NSObject {
         
     }
     
-    func postStudentLocations(UdacityAccountID: String?, firstName: String?, lastName: String?, mapString: String?, mediaURL: String?, latitude: Double?, longitude: Double?, completionHandler: (success: Bool, result: [String : AnyObject]?, errorString: String?) -> Void) {
+    
+
+    
+    func postStudentLocations(mediaURL: String?, completionHandler: (success: Bool, result: String?, errorString: String?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
         request.HTTPMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"5029538567\", \"firstName\": \"Li\", \"lastName\": \"Yin\",\"mapString\": \"\(udacityUserMapString!)\", \"mediaURL\": \"\(mediaURL!)\",\"latitude\": \(udacityUserLatitude!), \"longitude\": \(udacityUserLongitude!)}".dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
+            if error != nil {
+                
+                completionHandler(success: false, result: nil, errorString: "There is a error with your request!")
                 return
             }
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+            } catch {
+                parsedResult = nil
+                completionHandler(success: false, result: nil, errorString: "Can't parse JSON result")
+                print("Could not parse the data as JSON: '\(data)'")
+                return
+            }
+            
+            guard let result = parsedResult["objectId"] as? String else {
+                print("Cannot find key 'objectId' in \(parsedResult)")
+                completionHandler(success: false, result: nil, errorString: "Can't find objectId info")
+                return
+            }
+            
+            completionHandler(success: true, result: result, errorString: nil)
+            
+            
         }
+        
+        
         task.resume()
   
     }

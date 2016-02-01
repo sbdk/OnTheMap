@@ -70,7 +70,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             loginActivityIndicatorView.hidden = false
             loginActivityIndicatorView.startAnimating()
             
-            OTMClient.sharedInstance().creatUdacitySession(emailTextField.text!, passwordText: passwordTextField.text!) {(success, accountID, errorString) in
+            OTMClient.sharedInstance().loginWithUdacityCredential(self, emailInput: emailTextField.text!, passwordInput: passwordTextField.text!){(success, errorString) in
+                
+                dispatch_async(dispatch_get_main_queue()){
+                    self.loginActivityIndicatorView.stopAnimating()
+                    self.passwordTextField.text = ""
+                }
+                if success {
+                    
+                    self.completeLogin()
+                    
+                } else {
+                    
+                    OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
+                    
+                }
+            
+            }
+            
+           /* OTMClient.sharedInstance().creatUdacitySession(emailTextField.text!, passwordText: passwordTextField.text!) {(success, accountID, errorString) in
                 
                 dispatch_async(dispatch_get_main_queue()){
                     self.loginActivityIndicatorView.stopAnimating()
@@ -84,7 +102,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print("get Udacity Account ID: \(accountID)")
                     }
                     
-                    OTMClient.sharedInstance().getStudentInfoFromUdacity{(success, result, errorString) in
+                    
+                    OTMClient.sharedInstance().getStudentInfoFromUdacity(accountID!){(success, result, errorString) in
                         
                         if success {
                             dispatch_async(dispatch_get_main_queue()){
@@ -106,7 +125,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
                     print(errorString)
                 }
-            }
+            } */
         }
     
     }

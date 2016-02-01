@@ -11,36 +11,34 @@ import Foundation
 
 extension OTMClient {
     
-    func logoutUdacitySession(hostView: UIViewController, completionHandler: (success: Bool, errorString: String?) ->Void) {
+    func loginWithUdacityCredential(hostView: UIViewController, emailInput: String?, passwordInput: String?, completionHandler:(success: Bool, errorString: String?) -> Void) {
         
-        
-        //let controller = hostView.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-        //hostView.presentViewController(controller, animated: true, completion: nil)
-        //hostView.dismissViewControllerAnimated(true, completion: nil)
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "DELETE"
-        var xsrfCookie: NSHTTPCookie? = nil
-        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        for cookie in sharedCookieStorage.cookies! {
-            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
-        }
-        if let xsrfCookie = xsrfCookie {
-            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
-        }
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
-                completionHandler(success: false, errorString: "error")
-                return
+        creatUdacitySession(emailInput, passwordText: passwordInput){(success, accountID, errorString) in
+            
+            if success {
+                
+                self.udacityAccountID = accountID
+                print("get Udacity Account ID: \(accountID)")
+                
+                self.getStudentInfoFromUdacity(accountID!){(success, result, errorString) in
+                    
+                    if success {
+                        
+                        self.udacityFirstName = result!["first_name"] as? String
+                        self.udacityLastName = result!["last_name"] as? String
+                        print("get Udacity FirstName: \(result!["first_name"]!) and LastName:\(result!["last_name"]!)")
+                        completionHandler(success: success, errorString: errorString)
+                    } else {
+                        completionHandler(success: success, errorString: errorString)
+                    }
+                }
+                
+            } else {
+                completionHandler(success: success, errorString: errorString)
             }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-            completionHandler(success: true, errorString: nil)
+        
         }
-        
-        task.resume()
-        
-    }   
-
+    
+    }
+    
 }
