@@ -16,8 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
    
     var session = NSURLSession.sharedSession()
     var annotations = [MKPointAnnotation]()
-    var persons: [OTMPerson] = [OTMPerson]()
-    var parsedLocationData: [[String:AnyObject]]? = [[String:AnyObject]]()
+    //var parsedLocationData: [[String:AnyObject]]? = [[String:AnyObject]]()
     
     override func shouldAutorotate() -> Bool {
         return false
@@ -37,6 +36,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 print("\(results)")
                 }
             } else {
+                OTMClient.sharedInstance().presentAlertView("Get location data failed, \(errorString)!", hostView: self)
                 print(errorString)
             }
         }
@@ -99,6 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     print("reload data finish")
                 }
             } else {
+                OTMClient.sharedInstance().presentAlertView("Get location data failed, \(errorString)!", hostView: self)
                 print(errorString)
             }
         }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE4345E01C5ABE8D00852B8E /* OTMLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */; };
 		BE4B92FF1C5DE6BB00EC9B38 /* KeyboardConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */; };
+		BEDCD3641C5FE9FB00AAD586 /* OTMStudentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */; };
 		BEED772B1C5812EA005F6FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */; };
 		BEED77301C5812EA005F6FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEED772E1C5812EA005F6FA7 /* Main.storyboard */; };
 		BEED77321C5812EA005F6FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEED77311C5812EA005F6FA7 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMLogin.swift; sourceTree = "<group>"; };
 		BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardConfigration.swift; sourceTree = "<group>"; };
+		BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMStudentsData.swift; sourceTree = "<group>"; };
 		BEED77271C5812EA005F6FA7 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEED772F1C5812EA005F6FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */,
 				BEED77651C583E8E005F6FA7 /* OTMClient.swift */,
 				BEED77671C584090005F6FA7 /* OTMPerson.swift */,
+				BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */,
 				BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */,
 			);
 			name = Model;
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEDCD3641C5FE9FB00AAD586 /* OTMStudentsData.swift in Sources */,
 				BE4345E01C5ABE8D00852B8E /* OTMLogin.swift in Sources */,
 				BEED77661C583E8E005F6FA7 /* OTMClient.swift in Sources */,
 				BEED775C1C581688005F6FA7 /* MapViewController.swift in Sources */,

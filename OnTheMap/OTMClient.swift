@@ -23,8 +23,6 @@ class OTMClient: NSObject {
     var udacityUserMapString: String? = nil
     var parseObjectId: String? = nil
     
-    var Persons: [OTMPerson] = [OTMPerson]()
-    
     override init() {
         session = NSURLSession.sharedSession()
         super.init()
@@ -162,7 +160,7 @@ class OTMClient: NSObject {
     //functions using Parse API
     func getStudentLocations(completionHandler: (success: Bool, result: [[String : AnyObject]]?, errorString: String?) -> Void) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?limit=100")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?limit=100&order=-updatedAt")!)
         request.HTTPMethod = "GET"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")

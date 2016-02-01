@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 struct OTMPerson {
     
     var creatAt = ""
@@ -37,12 +38,10 @@ struct OTMPerson {
     }
     
     static func personsFromResults(results: [[String : AnyObject]]) -> [OTMPerson] {
-        
         var persons = [OTMPerson]()
         for result in results {
             persons.append(OTMPerson(dictionary: result))
         }
-        
         return persons
     }
 }

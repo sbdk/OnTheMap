@@ -12,9 +12,6 @@ import UIKit
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var personsTableView: UITableView!
     
-    var persons: [OTMPerson] = [OTMPerson]()
-    
-    
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -34,7 +31,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             if results != nil{
                 dispatch_async(dispatch_get_main_queue()){
-                    self.persons = OTMPerson.personsFromResults(results!)
+                    
+                    OTMStudentsData.sharedInstance().studentData = OTMPerson.personsFromResults(results!)
                     self.personsTableView.reloadData()
                 }
             } else {
@@ -45,14 +43,14 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let person = persons[indexPath.row]
+        let person = OTMStudentsData.sharedInstance().studentData[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("PersonsTableViewCell") as UITableViewCell!
         cell.textLabel!.text = person.firstName + " " + person.lastName
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return persons.count
+        return OTMStudentsData.sharedInstance().studentData.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -62,7 +60,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let person = persons[indexPath.row]
+        let person = OTMStudentsData.sharedInstance().studentData[indexPath.row]
         let app = UIApplication.sharedApplication()
         if let URL = NSURL(string: person.mediaURL) {
             app.openURL(URL)
@@ -90,7 +88,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             if results != nil{
                 dispatch_async(dispatch_get_main_queue()){
-                    self.persons = OTMPerson.personsFromResults(results!)
+                    OTMStudentsData.sharedInstance().studentData = OTMPerson.personsFromResults(results!)
                     self.personsTableView.reloadData()
                     self.view.alpha = 1
                     print("reload data finish")
