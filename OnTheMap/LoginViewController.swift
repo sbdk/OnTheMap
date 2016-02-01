@@ -13,7 +13,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var loginActivityIndicatorView: UIActivityIndicatorView!
@@ -24,24 +23,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var keyboardAdjusted = false
     var lastKeyboardOffset : CGFloat = 0.0
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         loginActivityIndicatorView.hidden = true
         loginActivityIndicatorView.hidesWhenStopped = true
+        facebookLoginButton.hidden = true
+        
         //subscribeToKeyboarNotifications()
         self.addKeyboardDismissRecognizer()
         self.subscribeToKeyboardNotifications()
-
-
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
         //unsubscribeFromKeyboarNotifications()
         self.removeKeyboardDismissRecognizer()
         self.unsubscribeToKeyboardNotifications()
-
-
     }
     
     override func viewDidLoad() {
@@ -51,11 +57,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         prepareTextField(emailTextField)
         prepareTextField(passwordTextField)
-        
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer?.numberOfTapsRequired = 1
-        
-        
     }
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
@@ -83,58 +86,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     
                     OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
-                    
                 }
-            
             }
-            
-           /* OTMClient.sharedInstance().creatUdacitySession(emailTextField.text!, passwordText: passwordTextField.text!) {(success, accountID, errorString) in
-                
-                dispatch_async(dispatch_get_main_queue()){
-                    self.loginActivityIndicatorView.stopAnimating()
-                    self.passwordTextField.text = ""
-                }
-
-                if success {
-                    
-                    dispatch_async(dispatch_get_main_queue()){
-                        OTMClient.sharedInstance().udacityAccountID = accountID
-                        print("get Udacity Account ID: \(accountID)")
-                    }
-                    
-                    
-                    OTMClient.sharedInstance().getStudentInfoFromUdacity(accountID!){(success, result, errorString) in
-                        
-                        if success {
-                            dispatch_async(dispatch_get_main_queue()){
-                                OTMClient.sharedInstance().udacityFirstName = result!["first_name"]!
-                                OTMClient.sharedInstance().udacityLastName = result!["last_name"]!
-                            }
-                            print("get Udacity FirstName: \(result!["first_name"]!) and LastName:\(result!["last_name"]!)")
-                            self.completeLogin()
-                            
-                        } else {
-                            
-                            OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
-                        }
-                        
-                    }
-        
-                } else {
-                    
-                    OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
-                    print(errorString)
-                }
-            } */
         }
-    
     }
     
     @IBAction func udacitySignUpButtonTouch(sender: AnyObject) {
         
         let app = UIApplication.sharedApplication()
         app.openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
-        
     }
     
     func completeLogin() {

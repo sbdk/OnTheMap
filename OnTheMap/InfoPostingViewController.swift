@@ -22,6 +22,14 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
     
     var session: NSURLSession!
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -33,8 +41,6 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         URLInputTextField.hidden = true
         findOnTheMapButton.hidden = false
         sumbitButton.hidden = true
-    
-        
     }
     
     //hide status bar for bigger editing area
@@ -66,6 +72,7 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 self.findOnTheMapButton.hidden = true
                 self.sumbitButton.hidden = false
                 
+                //store Geocoding data and MapString into shared instance
                 OTMClient.sharedInstance().udacityUserLatitude = coordinate?.latitude
                 OTMClient.sharedInstance().udacityUserLongitude = coordinate?.longitude
                 OTMClient.sharedInstance().udacityUserMapString = self.addressInputTextField.text!
@@ -91,9 +98,7 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
             OTMClient.sharedInstance().presentAlertView("Link can't be empty, please provide your link", hostView: self)
             
         } else {
-            
             OTMClient.sharedInstance().postStudentLocations(URLInputTextField.text!){ (success, result, errorString) in
-                
                 
                 if success {
                     
@@ -104,15 +109,13 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 } else {
                     OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
                 }
-                
-                
             }
-            
         }
+    }
+    
+    @IBAction func cancelButtonTouch(sender: AnyObject) {
         
-        
-        
-        
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func forwardGeocoding(hostView: UIViewController, addressInput: String, completionHandler: (success: Bool, coordinate: CLLocationCoordinate2D?) -> Void) {

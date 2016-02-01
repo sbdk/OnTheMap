@@ -23,16 +23,16 @@ struct OTMPerson {
     
     init(dictionary: [String : AnyObject]){
         
-        creatAt = dictionary[OTMClient.JSONResponseKeys.createdAt] as! String
-        updateAt = dictionary[OTMClient.JSONResponseKeys.updatedAt] as! String
-        firstName = dictionary[OTMClient.JSONResponseKeys.firstName] as! String
-        lastName = dictionary[OTMClient.JSONResponseKeys.lastName] as! String
-        latitude = dictionary[OTMClient.JSONResponseKeys.latitude] as! Double
-        longitude = dictionary[OTMClient.JSONResponseKeys.longitude] as! Double
-        mediaURL = dictionary[OTMClient.JSONResponseKeys.mediaURL] as! String
-        mapString = dictionary[OTMClient.JSONResponseKeys.mapString] as! String
-        objectId = dictionary[OTMClient.JSONResponseKeys.objectId] as! String
-        uniqueKey = dictionary[OTMClient.JSONResponseKeys.uniqueKey] as! String
+        creatAt = dictionary["createdAt"] as! String
+        updateAt = dictionary["updatedAt"] as! String
+        firstName = dictionary["firstName"] as! String
+        lastName = dictionary["lastName"] as! String
+        latitude = dictionary["latitude"] as! Double
+        longitude = dictionary["longitude"] as! Double
+        mediaURL = dictionary["mediaURL"] as! String
+        mapString = dictionary["mapString"] as! String
+        objectId = dictionary["objectId"] as! String
+        uniqueKey = dictionary["uniqueKey"] as! String
         
     }
     

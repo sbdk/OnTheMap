@@ -12,18 +12,16 @@ import MapKit
 
 class OTMClient: NSObject {
     
-    /* Shared session */
+    //Shared info
     var session: NSURLSession
     var udacitySessionID: String? = nil
-    var udacityAccountID: String? = nil //5029538567
+    var udacityAccountID: String? = nil
     var udacityFirstName: String? = nil
     var udacityLastName: String? = nil
     var udacityUserLatitude: Double? = nil
     var udacityUserLongitude: Double? = nil
     var udacityUserMapString: String? = nil
     var parseObjectId: String? = nil
-    
-    
     
     var Persons: [OTMPerson] = [OTMPerson]()
     
@@ -41,7 +39,7 @@ class OTMClient: NSObject {
         return Singleton.sharedInstance
     }
     
-    //using Udacity API
+    //functions using Udacity API
     func creatUdacitySession(emailText: String?, passwordText: String?, completionHandler: (success: Bool, accountID: String?, errorString: String?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
@@ -53,14 +51,14 @@ class OTMClient: NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
             if error != nil {
-                completionHandler(success: false, accountID: nil, errorString: "Invalid Request!")
+                completionHandler(success: false, accountID: nil, errorString: "Can't connect to server, please check your network condition and try again later")
                 return
             }
             
             /* GUARD: Did we get a successful 2XX response?*/
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 
-                completionHandler(success: false, accountID: nil, errorString: "account don't exist or wrong info")
+                completionHandler(success: false, accountID: nil, errorString: "account don't exist or wrong Email/Password")
                 
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
@@ -72,33 +70,29 @@ class OTMClient: NSObject {
                 return
             }
             
-            
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             
-            /* 5. Parse the data */
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
                 print("Login successful")
             } catch {
                 parsedResult = nil
-                completionHandler(success: false, accountID: nil, errorString: "error")
-                
+                completionHandler(success: false, accountID: nil, errorString: "Invalid data returned from server")
                 print("Could not parse the data as JSON: '\(data)'")
                 return
             }
             
             guard let account = parsedResult["account"] as? [String:AnyObject] else {
-                
-                completionHandler(success: false, accountID: nil, errorString: "error")
+                completionHandler(success: false, accountID: nil, errorString: "Can't find account info from returned data")
                 print("Cannot find account info \(parsedResult)")
                 return
             }
             
             guard let accountID = account["key"] as? String else {
-                completionHandler(success: false, accountID: nil, errorString: "error")
-                print("Cannot find account ID")
+                completionHandler(success: false, accountID: nil, errorString: "Can't find account ID from returned data")
+                print("Cannot find account ID from returned data")
                 return
             }
             
@@ -118,10 +112,8 @@ class OTMClient: NSObject {
                 return
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
+            //print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-            
-            /* 5. Parse the data */
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments) as? NSDictionary
@@ -129,32 +121,20 @@ class OTMClient: NSObject {
             } catch {
                 parsedResult = nil
                 completionHandler(success: false, result: nil, errorString: "can't parse Udacity JSON data")
-                
                 print("Could not parse the data as JSON: '\(newData)'")
                 return
             }
-            
-            //here comes the problem, fix it.
             guard let userDict = parsedResult["user"] as? [String : AnyObject] else {
-                
-                completionHandler(success: false, result: nil, errorString: "User data is empty")
+                completionHandler(success: false, result: nil, errorString: "Can't find user info on Udacity Server")
                 print("Cannot find account info \(parsedResult)")
                 return
             }
-            
             completionHandler(success: true, result: userDict, errorString: nil)
-            
         }
         task.resume()
-        
     }
     
     func logoutUdacitySession(hostView: UIViewController, completionHandler: (success: Bool, errorString: String?) ->Void) {
-        
-        
-        //let controller = hostView.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-        //hostView.presentViewController(controller, animated: true, completion: nil)
-        //hostView.dismissViewControllerAnimated(true, completion: nil)
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
         request.HTTPMethod = "DELETE"
@@ -172,16 +152,14 @@ class OTMClient: NSObject {
                 completionHandler(success: false, errorString: "error")
                 return
             }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             completionHandler(success: true, errorString: nil)
         }
-        
         task.resume()
-        
     }
 
-    //using Parse API
+    //functions using Parse API
     func getStudentLocations(completionHandler: (success: Bool, result: [[String : AnyObject]]?, errorString: String?) -> Void) {
         
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?limit=100")!)
@@ -192,11 +170,13 @@ class OTMClient: NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
             if error != nil {
-                print("There was an error with your request: \(error)")
+                completionHandler(success: false, result: nil, errorString: "Can't connect to Parse Server")
+                print("Can't connect to Parse Server: \(error)")
                 return
             }
-            
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                
+                completionHandler(success: false, result: nil, errorString: "Parse returned a invalid response")
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
                 } else if let response = response {
@@ -206,9 +186,9 @@ class OTMClient: NSObject {
                 }
                 return
             }
-            
             guard let data = data else {
-                print("No data was returned by the request!")
+                completionHandler(success: false, result: nil, errorString: "No data was returned from Parse Server")
+                print("No data was returned from Parse Server")
                 return
             }
             
@@ -217,29 +197,20 @@ class OTMClient: NSObject {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             } catch {
                 parsedResult = nil
-                completionHandler(success: false, result: nil, errorString: "error")
+                completionHandler(success: false, result: nil, errorString: "Can't parse returned JSON data")
                 print("Could not parse the data as JSON: '\(data)'")
                 return
             }
             
             guard let results = parsedResult["results"] as? [[String : AnyObject]] else {
+                completionHandler(success: false, result: nil, errorString: "Can't find user info on Parse Server")
                 print("Cannot find key 'results' in \(parsedResult)")
-                completionHandler(success: false, result: nil, errorString: "error")
                 return
             }
-            
             completionHandler(success: true, result: results, errorString: nil)
-            //self.persons = OTMPerson.personsFromResults(results)
-            //self.appDelegate.sharedPersonsInfo = self.persons
-            //self.studentInfo = results
-           
         }
         task.resume()
-        
     }
-    
-    
-
     
     func postStudentLocations(mediaURL: String?, completionHandler: (success: Bool, result: String?, errorString: String?) -> Void) {
         
@@ -248,12 +219,11 @@ class OTMClient: NSObject {
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"5029538567\", \"firstName\": \"Li\", \"lastName\": \"Yin\",\"mapString\": \"\(udacityUserMapString!)\", \"mediaURL\": \"\(mediaURL!)\",\"latitude\": \(udacityUserLatitude!), \"longitude\": \(udacityUserLongitude!)}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(udacityAccountID!)\", \"firstName\": \"\(udacityFirstName!)\", \"lastName\": \"\(udacityLastName!)\",\"mapString\": \"\(udacityUserMapString!)\", \"mediaURL\": \"\(mediaURL!)\",\"latitude\": \(udacityUserLatitude!), \"longitude\": \(udacityUserLongitude!)}".dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
-                
-                completionHandler(success: false, result: nil, errorString: "There is a error with your request!")
+                completionHandler(success: false, result: nil, errorString: "Can't connect to server, please check your network connection and try again later")
                 return
             }
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
@@ -273,15 +243,9 @@ class OTMClient: NSObject {
                 completionHandler(success: false, result: nil, errorString: "Can't find objectId info")
                 return
             }
-            
             completionHandler(success: true, result: result, errorString: nil)
-            
-            
         }
-        
-        
         task.resume()
-  
     }
     
     
@@ -294,21 +258,5 @@ class OTMClient: NSObject {
             alertController.addAction(okAction)
             hostView.presentViewController(alertController, animated: true, completion: nil)
         }
-   
     }
-    
-    
-    /*class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        
-        var parsedResult: AnyObject!
-        do {
-            parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-        } catch {
-            let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
-            completionHandler(result: nil, error: NSError(domain: "parseJSONWithCompletionHandler", code: 1, userInfo: userInfo))
-        }
-        
-        completionHandler(result: parsedResult, error: nil)
-    }*/
-
 }

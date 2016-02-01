@@ -13,13 +13,19 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
    
     var session = NSURLSession.sharedSession()
     var annotations = [MKPointAnnotation]()
     var persons: [OTMPerson] = [OTMPerson]()
     var parsedLocationData: [[String:AnyObject]]? = [[String:AnyObject]]()
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -38,13 +44,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
-        
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
@@ -57,7 +61,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         else {
             pinView!.annotation = annotation
         }
-        
         return pinView
     }
 
@@ -73,24 +76,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func logoutButtonTouch(sender: AnyObject) {
         
         OTMClient().logoutUdacitySession(self) {(success, errorString) in
-            
             if success {
-                
                 dispatch_async(dispatch_get_main_queue()) {
-                    
                     self.dismissViewControllerAnimated(true, completion: nil)
-                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-                    //self.presentViewController(controller, animated: true, completion: nil)
-                    
                 }
             }
-            
         }
     }
     
     @IBAction func refreshButtonTouch(sender: AnyObject) {
         
+        //first remove all current annotaions
+        let annonationsToRemove = self.mapView.annotations.filter{ $0 !== self.mapView.userLocation}
+        self.mapView.removeAnnotations(annonationsToRemove)
+        print("All currnt annoations have been removed")
+        
         OTMClient.sharedInstance().getStudentLocations() {(success, results, errorString) in
+            
             if results != nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.generateAnnotations(results!)
@@ -127,9 +129,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
                 annotations.append(annotation)
             }
-            
             self.mapView.addAnnotations(annotations)
-        
     }
-    
 }
