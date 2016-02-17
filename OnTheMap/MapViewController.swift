@@ -75,10 +75,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func logoutButtonTouch(sender: AnyObject) {
         
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
         OTMClient().logoutUdacitySession(self) {(success, errorString) in
             if success {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 }
             }
         }

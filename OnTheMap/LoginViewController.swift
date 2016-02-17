@@ -65,17 +65,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //dismissAnyVisibleKeyboards()
         self.view.endEditing(true)
+        
+        
         if emailTextField.text!.isEmpty {
             OTMClient.sharedInstance().presentAlertView("Email can't be empty", hostView: self)
         } else if passwordTextField.text!.isEmpty {
             OTMClient.sharedInstance().presentAlertView("Password can't be empty", hostView: self)
         } else {
+            //update UI
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             loginActivityIndicatorView.hidden = false
             loginActivityIndicatorView.startAnimating()
             
             OTMClient.sharedInstance().loginWithUdacityCredential(self, emailInput: emailTextField.text!, passwordInput: passwordTextField.text!){(success, errorString) in
                 
                 dispatch_async(dispatch_get_main_queue()){
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     self.loginActivityIndicatorView.stopAnimating()
                     self.passwordTextField.text = ""
                 }
