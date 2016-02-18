@@ -102,7 +102,13 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func pinButtonTouch(sender: AnyObject) {
     
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController") as! InfoPostingViewController
-        self.presentViewController(controller, animated: true, completion: nil)
+        if OTMClient.sharedInstance().usedObjectID.count != 0 {
+            
+            OTMClient.sharedInstance().presentOverwriteAlertView(self)
+            
+        } else {
+            
+            OTMClient.sharedInstance().presentPostingView(self)
+        }
     }
 }

@@ -44,6 +44,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        OTMClient.sharedInstance().queryStudentPostings{(success, result, errorString) in
+            
+            if success {
+                
+                for item in result! {
+                    
+                    let tempObjectID = item["objectId"] as! String
+                    OTMClient.sharedInstance().usedObjectID.append(tempObjectID)
+                }
+            
+            } else {
+                OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
+            }
+            
+        }
     }
 
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -110,8 +126,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func pinButtonTouch(sender: AnyObject) {
         
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController") as! InfoPostingViewController
-        self.presentViewController(controller, animated: true, completion: nil)
+        if OTMClient.sharedInstance().usedObjectID.count != 0 {
+            
+            OTMClient.sharedInstance().presentOverwriteAlertView(self)
+            
+        } else {
+            
+            OTMClient.sharedInstance().presentPostingView(self)
+        }
     }
     
     
@@ -135,4 +157,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             self.mapView.addAnnotations(annotations)
     }
+    
+    /*func presentPostingView(){
+        
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController") as! InfoPostingViewController
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+    }*/
 }

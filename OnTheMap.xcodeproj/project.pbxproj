@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		BE4345E01C5ABE8D00852B8E /* OTMLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */; };
 		BE4B92FF1C5DE6BB00EC9B38 /* KeyboardConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */; };
+		BE762E291C753B0A00D35CD7 /* OTMParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE762E281C753B0A00D35CD7 /* OTMParseClient.swift */; };
 		BEDCD3641C5FE9FB00AAD586 /* OTMStudentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */; };
+		BEE9D70F1C7402FD002FE3A1 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9D70E1C7402FD002FE3A1 /* OTMConstants.swift */; };
+		BEEB6DEC1C75A18D00864BBB /* OTMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB6DEB1C75A18D00864BBB /* OTMView.swift */; };
 		BEED772B1C5812EA005F6FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */; };
 		BEED77301C5812EA005F6FA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEED772E1C5812EA005F6FA7 /* Main.storyboard */; };
 		BEED77321C5812EA005F6FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEED77311C5812EA005F6FA7 /* Assets.xcassets */; };
@@ -44,7 +47,10 @@
 /* Begin PBXFileReference section */
 		BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMLogin.swift; sourceTree = "<group>"; };
 		BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardConfigration.swift; sourceTree = "<group>"; };
+		BE762E281C753B0A00D35CD7 /* OTMParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMParseClient.swift; sourceTree = "<group>"; };
 		BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMStudentsData.swift; sourceTree = "<group>"; };
+		BEE9D70E1C7402FD002FE3A1 /* OTMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
+		BEEB6DEB1C75A18D00864BBB /* OTMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMView.swift; sourceTree = "<group>"; };
 		BEED77271C5812EA005F6FA7 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEED772A1C5812EA005F6FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEED772F1C5812EA005F6FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -147,6 +153,9 @@
 			children = (
 				BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */,
 				BEED77651C583E8E005F6FA7 /* OTMClient.swift */,
+				BEEB6DEB1C75A18D00864BBB /* OTMView.swift */,
+				BE762E281C753B0A00D35CD7 /* OTMParseClient.swift */,
+				BEE9D70E1C7402FD002FE3A1 /* OTMConstants.swift */,
 				BEED77671C584090005F6FA7 /* OTMPerson.swift */,
 				BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */,
 				BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */,
@@ -301,9 +310,12 @@
 				BEED77661C583E8E005F6FA7 /* OTMClient.swift in Sources */,
 				BEED775C1C581688005F6FA7 /* MapViewController.swift in Sources */,
 				BE4B92FF1C5DE6BB00EC9B38 /* KeyboardConfigration.swift in Sources */,
+				BE762E291C753B0A00D35CD7 /* OTMParseClient.swift in Sources */,
 				BEED77681C584090005F6FA7 /* OTMPerson.swift in Sources */,
 				BEED772B1C5812EA005F6FA7 /* AppDelegate.swift in Sources */,
+				BEEB6DEC1C75A18D00864BBB /* OTMView.swift in Sources */,
 				BEED77621C5816C1005F6FA7 /* InfoPostingViewController.swift in Sources */,
+				BEE9D70F1C7402FD002FE3A1 /* OTMConstants.swift in Sources */,
 				BEED77601C5816AF005F6FA7 /* LoginViewController.swift in Sources */,
 				BEED775E1C581698005F6FA7 /* TableViewController.swift in Sources */,
 			);

@@ -146,6 +146,19 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         })
     }
     
+    @IBAction func showHistoryButtonTouch(sender: AnyObject) {
+        
+        OTMClient.sharedInstance().queryStudentPostings{(success, result, errorString) in
+        
+            if success {
+                print(result)
+            } else {
+                OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
+            }
+            
+        }
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
