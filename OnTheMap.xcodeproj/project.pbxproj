@@ -166,9 +166,9 @@
 		BEED775A1C58154E005F6FA7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				BEED775F1C5816AF005F6FA7 /* LoginViewController.swift */,
 				BEED775B1C581688005F6FA7 /* MapViewController.swift */,
 				BEED775D1C581698005F6FA7 /* TableViewController.swift */,
-				BEED775F1C5816AF005F6FA7 /* LoginViewController.swift */,
 				BEED77611C5816C1005F6FA7 /* InfoPostingViewController.swift */,
 			);
 			name = ViewController;

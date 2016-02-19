@@ -169,9 +169,9 @@ extension OTMClient {
         task.resume()
     }
     
-    /*func updateStudentPosting(objectId: String, completionHandler: (success: Bool, result: [String : AnyObject]?, errorString: String?) -> Void){
+    func updateStudentPosting(objectId: String, mediaURL: String?, completionHandler: (success: Bool, result: String?, errorString: String?) -> Void){
         
-        let urlString = "https://api.parse.com/1/classes/StudentLocation/8ZExGR5uX8"
+        let urlString = "https://api.parse.com/1/classes/StudentLocation/\(objectId)"
         let url = NSURL(string: urlString)
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "PUT"
@@ -180,7 +180,6 @@ extension OTMClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let jsonBody: [String:AnyObject] = [
-            
             OTMClient.JSONBodyKeys.uniqueKey: udacityAccountID!,
             OTMClient.JSONBodyKeys.firstName: udacityFirstName!,
             OTMClient.JSONBodyKeys.lastName: udacityLastName!,
@@ -190,16 +189,36 @@ extension OTMClient {
             OTMClient.JSONBodyKeys.longitude: udacityUserLongitude!
         ]
         
-        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.322998, \"longitude\": -122.032182}".dataUsingEncoding(NSUTF8StringEncoding)
+        do{
+            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
+        }
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
+            if error != nil {
+                completionHandler(success: false, result: nil, errorString: "Can't connect to server, please check your network connection and try again later")
                 return
             }
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            
+            let parsedResult: AnyObject!
+            do {
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+            } catch {
+                parsedResult = nil
+                completionHandler(success: false, result: nil, errorString: "Can't parse JSON result")
+                print("Could not parse the data as JSON: '\(data)'")
+                return
+            }
+            
+            guard let result = parsedResult["updatedAt"] as? String else {
+                print("Cannot find key 'objectId' in \(parsedResult)")
+                completionHandler(success: false, result: nil, errorString: "Can't find objectId info")
+                return
+            }
+            print("Update Successful, \(result)")
+            completionHandler(success: true, result: result, errorString: nil)
         }
         task.resume()
-        
-    }*/
+    }
     
 }

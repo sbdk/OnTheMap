@@ -17,7 +17,7 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
     @IBOutlet weak var addressInputTextField: UITextField!
     @IBOutlet weak var URLInputTextField: UITextField!
     @IBOutlet weak var findOnTheMapButton: UIButton!
-    @IBOutlet weak var sumbitButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var session: NSURLSession!
@@ -40,13 +40,13 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         addressInputTextField.hidden = false
         URLInputTextField.hidden = true
         findOnTheMapButton.hidden = false
-        sumbitButton.hidden = true
+        submitButton.hidden = true
     }
     
     //hide status bar for bigger editing area
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+    //override func prefersStatusBarHidden() -> Bool {
+        //return true
+    //}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,20 +57,22 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
     
     @IBAction func findOnTheMapButtonTouch(sender: AnyObject) {
         
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         activityIndicator.hidden = false
         activityIndicator.startAnimating()
         forwardGeocoding(self, addressInput: addressInputTextField.text!) {(success, coordinate) in
             dispatch_async(dispatch_get_main_queue()){
-                self.activityIndicator.stopAnimating()
+                //self.activityIndicator.stopAnimating()
             }
             if success {
-                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                self.activityIndicator.stopAnimating()
                 self.infoPostingMapView.hidden = false
                 self.promptLabel.hidden = true
                 self.addressInputTextField.hidden = true
                 self.URLInputTextField.hidden = false
                 self.findOnTheMapButton.hidden = true
-                self.sumbitButton.hidden = false
+                self.submitButton.hidden = false
                 
                 //store Geocoding data and MapString into shared instance
                 OTMClient.sharedInstance().udacityUserLatitude = coordinate?.latitude
@@ -91,18 +93,42 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         }
     }
 
-    @IBAction func sumbitButtonTouch(sender: AnyObject) {
+    @IBAction func submitButtonTouch(sender: AnyObject) {
         
         if URLInputTextField.text!.isEmpty {
             
             OTMClient.sharedInstance().presentAlertView("Link can't be empty, please provide your link", hostView: self)
             
+        } else if OTMClient.sharedInstance().usedObjectID.count != 0 {
+            
+            activityIndicator.hidden = false
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            
+            for id in OTMClient.sharedInstance().usedObjectID {
+                
+                OTMClient.sharedInstance().updateStudentPosting(id, mediaURL: URLInputTextField!.text){(success, result, errorString) in
+                    
+                    if success {
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                        print("Post info sucessful,updated at \(result)")
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
+                    }
+                    
+                }
+            }
+   
         } else {
             OTMClient.sharedInstance().postStudentLocations(URLInputTextField.text!){ (success, result, errorString) in
                 
                 if success {
                     
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                     OTMClient.sharedInstance().parseObjectId = result
+                    OTMClient.sharedInstance().udacityUserMediaURL = self.URLInputTextField!.text
                     print("Post info sucessful, get Parse ObjectId: \(result)")
                     self.dismissViewControllerAnimated(true, completion: nil)
                     
@@ -111,6 +137,7 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 }
             }
         }
+
     }
     
     @IBAction func cancelButtonTouch(sender: AnyObject) {
@@ -144,19 +171,6 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 
             }
         })
-    }
-    
-    @IBAction func showHistoryButtonTouch(sender: AnyObject) {
-        
-        OTMClient.sharedInstance().queryStudentPostings{(success, result, errorString) in
-        
-            if success {
-                print(result)
-            } else {
-                OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
-            }
-            
-        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

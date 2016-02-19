@@ -24,7 +24,7 @@ extension OTMClient {
     
     func presentOverwriteAlertView(hostView: UIViewController){
         
-        let alertController = UIAlertController(title: nil, message: "You have already posted a student location. Would you like to overwrite your current location?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "", message: "You have already posted a student location. Would you like to overwrite your current location?", preferredStyle: UIAlertControllerStyle.Alert)
         let overwriteAction = UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.Destructive, handler: {(action) in OTMClient.sharedInstance().presentPostingView(hostView)})
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
         

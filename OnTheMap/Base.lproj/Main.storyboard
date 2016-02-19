@@ -634,60 +634,6 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUA-mi-ZMg">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.99607473611831665" green="0.99220293760299683" blue="0.99199241399765015" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="MX9-82-ACX"/>
-                                </constraints>
-                                <state key="normal" title="Submit"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="MX9-82-ACX"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="MX9-82-ACX"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="sumbitButtonTouch:" destination="grG-HV-ClN" eventType="touchUpInside" id="r9h-oJ-wUg"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-T4-CLM">
-                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sB2-07-V7x">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="cancelButtonTouch:" destination="grG-HV-ClN" eventType="touchUpInside" id="7Hr-47-XWc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcL-qa-tUQ">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="2Ur-s9-6ib"/>
-                                    <constraint firstAttribute="height" constant="30" id="uCx-ur-IhF"/>
-                                </constraints>
-                                <state key="normal" title="Show History"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="2Ur-s9-6ib"/>
-                                        <exclude reference="uCx-ur-IhF"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="2Ur-s9-6ib"/>
-                                        <include reference="uCx-ur-IhF"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="showHistoryButtonTouch:" destination="grG-HV-ClN" eventType="touchUpInside" id="TW6-IN-RZx"/>
-                                </connections>
-                            </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mWa-Xf-fFz">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
@@ -706,6 +652,40 @@
                                     </mask>
                                 </variation>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37n-fQ-4ay">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="4ty-9d-1qm"/>
+                                    <constraint firstAttribute="height" constant="30" id="Jd9-yo-S07"/>
+                                </constraints>
+                                <state key="normal" title="Submit"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4ty-9d-1qm"/>
+                                        <exclude reference="Jd9-yo-S07"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="4ty-9d-1qm"/>
+                                        <include reference="Jd9-yo-S07"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="submitButtonTouch:" destination="grG-HV-ClN" eventType="touchUpInside" id="iGh-6z-7si"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6Oj-T4-CLM">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sB2-07-V7x">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTouch:" destination="grG-HV-ClN" eventType="touchUpInside" id="7Hr-47-XWc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -716,7 +696,6 @@
                             <constraint firstItem="8Na-Ja-2E4" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="1mC-S7-8pB"/>
                             <constraint firstItem="OgX-eR-Blh" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="9Mh-2B-ZiS"/>
                             <constraint firstAttribute="trailing" secondItem="mWa-Xf-fFz" secondAttribute="trailing" id="9OL-bF-bKR"/>
-                            <constraint firstItem="NUA-mi-ZMg" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="9qd-zo-fQ1"/>
                             <constraint firstItem="OgX-eR-Blh" firstAttribute="top" secondItem="aUv-WR-QGT" secondAttribute="bottom" constant="40" id="ELG-4I-8gc">
                                 <variation key="heightClass=regular" constant="10"/>
                             </constraint>
@@ -730,15 +709,16 @@
                             <constraint firstAttribute="trailing" secondItem="sB2-07-V7x" secondAttribute="trailing" constant="5" id="VSx-QF-mcm"/>
                             <constraint firstItem="SPc-1O-bS5" firstAttribute="top" secondItem="L6R-UJ-wR8" secondAttribute="bottom" constant="40" id="XVr-mW-Nx1"/>
                             <constraint firstItem="mWa-Xf-fFz" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="Y5x-Ke-IB9"/>
-                            <constraint firstItem="SPc-1O-bS5" firstAttribute="top" secondItem="NUA-mi-ZMg" secondAttribute="bottom" constant="40" id="iyo-RC-75g"/>
+                            <constraint firstItem="37n-fQ-4ay" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="cvv-1l-0hZ"/>
                             <constraint firstItem="8Na-Ja-2E4" firstAttribute="top" secondItem="aUv-WR-QGT" secondAttribute="bottom" constant="60" id="jdr-nj-Zya"/>
                             <constraint firstItem="SPc-1O-bS5" firstAttribute="top" secondItem="mWa-Xf-fFz" secondAttribute="bottom" id="o7R-Ut-W71"/>
-                            <constraint firstItem="NUA-mi-ZMg" firstAttribute="top" secondItem="HcL-qa-tUQ" secondAttribute="bottom" constant="30" id="rBN-Ew-nOB"/>
                             <constraint firstItem="b4F-8s-jXy" firstAttribute="top" secondItem="OgX-eR-Blh" secondAttribute="bottom" constant="60" id="tGz-ws-WE5">
                                 <variation key="heightClass=regular" constant="30"/>
                             </constraint>
+                            <constraint firstItem="SPc-1O-bS5" firstAttribute="top" secondItem="37n-fQ-4ay" secondAttribute="bottom" constant="81" id="tf6-N5-8Z2">
+                                <variation key="heightClass=regular" constant="80"/>
+                            </constraint>
                             <constraint firstItem="6Oj-T4-CLM" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="ves-jY-MPg"/>
-                            <constraint firstItem="HcL-qa-tUQ" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="wVz-ji-4ps"/>
                             <constraint firstItem="mWa-Xf-fFz" firstAttribute="leading" secondItem="Qhz-y0-c3l" secondAttribute="leading" id="xM0-pP-tOI"/>
                             <constraint firstItem="b4F-8s-jXy" firstAttribute="centerX" secondItem="Qhz-y0-c3l" secondAttribute="centerX" id="zpA-hG-sck"/>
                         </constraints>
@@ -748,11 +728,10 @@
                                 <exclude reference="b4F-8s-jXy"/>
                                 <exclude reference="L6R-UJ-wR8"/>
                                 <exclude reference="8Na-Ja-2E4"/>
-                                <exclude reference="NUA-mi-ZMg"/>
+                                <exclude reference="mWa-Xf-fFz"/>
+                                <exclude reference="37n-fQ-4ay"/>
                                 <exclude reference="6Oj-T4-CLM"/>
                                 <exclude reference="sB2-07-V7x"/>
-                                <exclude reference="HcL-qa-tUQ"/>
-                                <exclude reference="mWa-Xf-fFz"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="1mC-S7-8pB"/>
@@ -770,13 +749,11 @@
                                 <exclude reference="VSx-QF-mcm"/>
                                 <exclude reference="Gw2-B0-MoV"/>
                                 <exclude reference="ves-jY-MPg"/>
-                                <exclude reference="wVz-ji-4ps"/>
+                                <exclude reference="cvv-1l-0hZ"/>
                                 <exclude reference="0QY-f4-mgc"/>
-                                <exclude reference="9qd-zo-fQ1"/>
-                                <exclude reference="rBN-Ew-nOB"/>
                                 <exclude reference="XVr-mW-Nx1"/>
-                                <exclude reference="iyo-RC-75g"/>
                                 <exclude reference="o7R-Ut-W71"/>
+                                <exclude reference="tf6-N5-8Z2"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -785,11 +762,10 @@
                                 <include reference="b4F-8s-jXy"/>
                                 <include reference="L6R-UJ-wR8"/>
                                 <include reference="8Na-Ja-2E4"/>
-                                <include reference="NUA-mi-ZMg"/>
+                                <include reference="mWa-Xf-fFz"/>
+                                <include reference="37n-fQ-4ay"/>
                                 <include reference="6Oj-T4-CLM"/>
                                 <include reference="sB2-07-V7x"/>
-                                <include reference="HcL-qa-tUQ"/>
-                                <include reference="mWa-Xf-fFz"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="1mC-S7-8pB"/>
@@ -807,13 +783,11 @@
                                 <include reference="VSx-QF-mcm"/>
                                 <include reference="Gw2-B0-MoV"/>
                                 <include reference="ves-jY-MPg"/>
-                                <include reference="wVz-ji-4ps"/>
+                                <include reference="cvv-1l-0hZ"/>
                                 <include reference="0QY-f4-mgc"/>
-                                <include reference="9qd-zo-fQ1"/>
-                                <include reference="rBN-Ew-nOB"/>
                                 <include reference="XVr-mW-Nx1"/>
-                                <include reference="iyo-RC-75g"/>
                                 <include reference="o7R-Ut-W71"/>
+                                <include reference="tf6-N5-8Z2"/>
                             </mask>
                         </variation>
                     </view>
@@ -825,7 +799,7 @@
                         <outlet property="findOnTheMapButton" destination="L6R-UJ-wR8" id="NRi-Mj-Gy7"/>
                         <outlet property="infoPostingMapView" destination="mWa-Xf-fFz" id="9Xd-JL-kmp"/>
                         <outlet property="promptLabel" destination="OgX-eR-Blh" id="wWL-Xw-bnF"/>
-                        <outlet property="sumbitButton" destination="NUA-mi-ZMg" id="JEy-pO-CmZ"/>
+                        <outlet property="submitButton" destination="37n-fQ-4ay" id="98B-ac-iOL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sW7-5u-uKt" userLabel="First Responder" sceneMemberID="firstResponder"/>

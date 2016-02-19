@@ -71,6 +71,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func logoutButtonTouch(sender: AnyObject) {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        OTMClient.sharedInstance().usedObjectID = []
+        
         OTMClient().logoutUdacitySession(self) {(success, errorString) in
 
             if success {

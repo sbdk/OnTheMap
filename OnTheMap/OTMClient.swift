@@ -21,6 +21,7 @@ class OTMClient: NSObject {
     var udacityUserLatitude: Double? = nil
     var udacityUserLongitude: Double? = nil
     var udacityUserMapString: String? = nil
+    var udacityUserMediaURL: String? = nil
     var parseObjectId: String? = nil
     var usedObjectID = [String]()
     

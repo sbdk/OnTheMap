@@ -16,7 +16,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
    
     var session = NSURLSession.sharedSession()
     var annotations = [MKPointAnnotation]()
-    //var parsedLocationData: [[String:AnyObject]]? = [[String:AnyObject]]()
     
     override func shouldAutorotate() -> Bool {
         return false
@@ -33,7 +32,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if results != nil {
                 dispatch_async(dispatch_get_main_queue()){
                 self.generateAnnotations(results!)
-                print("\(results)")
+                
                 }
             } else {
                 OTMClient.sharedInstance().presentAlertView("Get location data failed, \(errorString)!", hostView: self)
@@ -54,6 +53,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     let tempObjectID = item["objectId"] as! String
                     OTMClient.sharedInstance().usedObjectID.append(tempObjectID)
                 }
+                
+                print("query student info success! Parse objectID result: \(OTMClient.sharedInstance().usedObjectID))")
             
             } else {
                 OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
@@ -92,6 +93,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func logoutButtonTouch(sender: AnyObject) {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        OTMClient.sharedInstance().usedObjectID = []
         
         OTMClient().logoutUdacitySession(self) {(success, errorString) in
             if success {
@@ -106,8 +108,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func refreshButtonTouch(sender: AnyObject) {
         
         //first remove all current annotaions
-        let annonationsToRemove = self.mapView.annotations.filter{ $0 !== self.mapView.userLocation}
-        self.mapView.removeAnnotations(annonationsToRemove)
+        //let annonationsToRemove = self.mapView.annotations.filter{ $0 !== self.mapView.userLocation}
+        //self.mapView.removeAnnotations(annonationsToRemove)
+        mapView.removeAnnotations(annotations)
         print("All currnt annoations have been removed")
         
         OTMClient.sharedInstance().getStudentLocations() {(success, results, errorString) in
@@ -157,11 +160,4 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             self.mapView.addAnnotations(annotations)
     }
-    
-    /*func presentPostingView(){
-        
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController") as! InfoPostingViewController
-        self.presentViewController(controller, animated: true, completion: nil)
-        
-    }*/
 }
