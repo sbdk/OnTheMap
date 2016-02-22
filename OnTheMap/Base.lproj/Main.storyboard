@@ -734,26 +734,26 @@
                                 <exclude reference="sB2-07-V7x"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="XVr-mW-Nx1"/>
+                                <exclude reference="o7R-Ut-W71"/>
+                                <exclude reference="tf6-N5-8Z2"/>
+                                <exclude reference="Gw2-B0-MoV"/>
+                                <exclude reference="ves-jY-MPg"/>
                                 <exclude reference="1mC-S7-8pB"/>
                                 <exclude reference="jdr-nj-Zya"/>
-                                <exclude reference="9Mh-2B-ZiS"/>
-                                <exclude reference="ELG-4I-8gc"/>
                                 <exclude reference="tGz-ws-WE5"/>
                                 <exclude reference="zpA-hG-sck"/>
+                                <exclude reference="cvv-1l-0hZ"/>
+                                <exclude reference="0QY-f4-mgc"/>
+                                <exclude reference="MBn-Zo-QtN"/>
+                                <exclude reference="VSx-QF-mcm"/>
+                                <exclude reference="9Mh-2B-ZiS"/>
+                                <exclude reference="ELG-4I-8gc"/>
                                 <exclude reference="0fD-1d-gng"/>
                                 <exclude reference="9OL-bF-bKR"/>
                                 <exclude reference="PDB-8R-a5d"/>
                                 <exclude reference="Y5x-Ke-IB9"/>
                                 <exclude reference="xM0-pP-tOI"/>
-                                <exclude reference="MBn-Zo-QtN"/>
-                                <exclude reference="VSx-QF-mcm"/>
-                                <exclude reference="Gw2-B0-MoV"/>
-                                <exclude reference="ves-jY-MPg"/>
-                                <exclude reference="cvv-1l-0hZ"/>
-                                <exclude reference="0QY-f4-mgc"/>
-                                <exclude reference="XVr-mW-Nx1"/>
-                                <exclude reference="o7R-Ut-W71"/>
-                                <exclude reference="tf6-N5-8Z2"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -768,26 +768,26 @@
                                 <include reference="sB2-07-V7x"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="XVr-mW-Nx1"/>
+                                <include reference="o7R-Ut-W71"/>
+                                <include reference="tf6-N5-8Z2"/>
+                                <include reference="Gw2-B0-MoV"/>
+                                <include reference="ves-jY-MPg"/>
                                 <include reference="1mC-S7-8pB"/>
                                 <include reference="jdr-nj-Zya"/>
-                                <include reference="9Mh-2B-ZiS"/>
-                                <include reference="ELG-4I-8gc"/>
                                 <include reference="tGz-ws-WE5"/>
                                 <include reference="zpA-hG-sck"/>
+                                <include reference="cvv-1l-0hZ"/>
+                                <include reference="0QY-f4-mgc"/>
+                                <include reference="MBn-Zo-QtN"/>
+                                <include reference="VSx-QF-mcm"/>
+                                <include reference="9Mh-2B-ZiS"/>
+                                <include reference="ELG-4I-8gc"/>
                                 <exclude reference="0fD-1d-gng"/>
                                 <include reference="9OL-bF-bKR"/>
                                 <include reference="PDB-8R-a5d"/>
                                 <include reference="Y5x-Ke-IB9"/>
                                 <include reference="xM0-pP-tOI"/>
-                                <include reference="MBn-Zo-QtN"/>
-                                <include reference="VSx-QF-mcm"/>
-                                <include reference="Gw2-B0-MoV"/>
-                                <include reference="ves-jY-MPg"/>
-                                <include reference="cvv-1l-0hZ"/>
-                                <include reference="0QY-f4-mgc"/>
-                                <include reference="XVr-mW-Nx1"/>
-                                <include reference="o7R-Ut-W71"/>
-                                <include reference="tf6-N5-8Z2"/>
                             </mask>
                         </variation>
                     </view>

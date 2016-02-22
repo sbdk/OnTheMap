@@ -89,6 +89,9 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
                 
             } else {
                 
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                self.activityIndicator.stopAnimating()
+                
             }
         }
     }
@@ -173,6 +176,7 @@ class InfoPostingViewController: UIViewController, MKMapViewDelegate, UITextFiel
         })
     }
     
+    //need use textFieldDelegate and applied to target textField
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()

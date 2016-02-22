@@ -16,6 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
    
     var session = NSURLSession.sharedSession()
     var annotations = [MKPointAnnotation]()
+
     
     override func shouldAutorotate() -> Bool {
         return false
@@ -27,6 +28,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        print("MapView appeared")
+        
+        //clear mapview whenever it reload or present
+        mapView.removeAnnotations(annotations)
+        annotations.removeAll()
         
         OTMClient.sharedInstance().getStudentLocations() {(success, results, errorString) in
             if results != nil {
@@ -107,10 +113,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func refreshButtonTouch(sender: AnyObject) {
         
-        //first remove all current annotaions
-        //let annonationsToRemove = self.mapView.annotations.filter{ $0 !== self.mapView.userLocation}
-        //self.mapView.removeAnnotations(annonationsToRemove)
         mapView.removeAnnotations(annotations)
+        annotations.removeAll()
         print("All currnt annoations have been removed")
         
         OTMClient.sharedInstance().getStudentLocations() {(success, results, errorString) in
