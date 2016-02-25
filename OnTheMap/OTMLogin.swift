@@ -40,4 +40,33 @@ extension OTMClient {
         }
     
     }
+    
+    func loginWithFacebookCredential(FacebookAccessToken: String?, completionHandler: (success: Bool, errorString: String?) -> Void) {
+        
+        creatFacebookSession(FacebookAccessToken){(success, accountID, errorString) in
+            
+            if success {
+                
+                self.udacityAccountID = accountID
+                print("get Udacity Account ID from Facebook Session: \(accountID)")
+                
+                self.getStudentInfoFromUdacity(accountID!){(success, result, errorString) in
+                    
+                    if success {
+                        
+                        self.udacityFirstName = result!["first_name"] as? String
+                        self.udacityLastName = result!["last_name"] as? String
+                        print("get Udacity FirstName: \(result!["first_name"]!) and LastName:\(result!["last_name"]!)")
+                        completionHandler(success: success, errorString: errorString)
+                    } else {
+                        completionHandler(success: success, errorString: errorString)
+                    }
+                }
+                
+            } else {
+                completionHandler(success: success, errorString: errorString)
+            }
+            
+        }
+    }
 }

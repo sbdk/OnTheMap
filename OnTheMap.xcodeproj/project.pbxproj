@@ -10,6 +10,9 @@
 		BE4345E01C5ABE8D00852B8E /* OTMLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */; };
 		BE4B92FF1C5DE6BB00EC9B38 /* KeyboardConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */; };
 		BE762E291C753B0A00D35CD7 /* OTMParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE762E281C753B0A00D35CD7 /* OTMParseClient.swift */; };
+		BEB143931C7E6688005FA836 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB143911C7E6688005FA836 /* FBSDKLoginKit.framework */; };
+		BEB143941C7E6688005FA836 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB143921C7E6688005FA836 /* FBSDKCoreKit.framework */; };
+		BEB143961C7EBDDE005FA836 /* OTMFBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB143951C7EBDDE005FA836 /* OTMFBClient.swift */; };
 		BEDCD3641C5FE9FB00AAD586 /* OTMStudentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */; };
 		BEE9D70F1C7402FD002FE3A1 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE9D70E1C7402FD002FE3A1 /* OTMConstants.swift */; };
 		BEEB6DEC1C75A18D00864BBB /* OTMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEB6DEB1C75A18D00864BBB /* OTMView.swift */; };
@@ -48,6 +51,9 @@
 		BE4345DF1C5ABE8D00852B8E /* OTMLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMLogin.swift; sourceTree = "<group>"; };
 		BE4B92FE1C5DE6BB00EC9B38 /* KeyboardConfigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardConfigration.swift; sourceTree = "<group>"; };
 		BE762E281C753B0A00D35CD7 /* OTMParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMParseClient.swift; sourceTree = "<group>"; };
+		BEB143911C7E6688005FA836 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		BEB143921C7E6688005FA836 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		BEB143951C7EBDDE005FA836 /* OTMFBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMFBClient.swift; sourceTree = "<group>"; };
 		BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMStudentsData.swift; sourceTree = "<group>"; };
 		BEE9D70E1C7402FD002FE3A1 /* OTMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
 		BEEB6DEB1C75A18D00864BBB /* OTMView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMView.swift; sourceTree = "<group>"; };
@@ -76,6 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEB143931C7E6688005FA836 /* FBSDKLoginKit.framework in Frameworks */,
+				BEB143941C7E6688005FA836 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,9 +104,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BEB143901C7E6611005FA836 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				BEB143911C7E6688005FA836 /* FBSDKLoginKit.framework */,
+				BEB143921C7E6688005FA836 /* FBSDKCoreKit.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
 		BEED771E1C5812EA005F6FA7 = {
 			isa = PBXGroup;
 			children = (
+				BEB143901C7E6611005FA836 /* Framework */,
 				BEED77291C5812EA005F6FA7 /* OnTheMap */,
 				BEED773E1C5812EA005F6FA7 /* OnTheMapTests */,
 				BEED77491C5812EA005F6FA7 /* OnTheMapUITests */,
@@ -155,6 +173,7 @@
 				BEED77651C583E8E005F6FA7 /* OTMClient.swift */,
 				BEEB6DEB1C75A18D00864BBB /* OTMView.swift */,
 				BE762E281C753B0A00D35CD7 /* OTMParseClient.swift */,
+				BEB143951C7EBDDE005FA836 /* OTMFBClient.swift */,
 				BEE9D70E1C7402FD002FE3A1 /* OTMConstants.swift */,
 				BEED77671C584090005F6FA7 /* OTMPerson.swift */,
 				BEDCD3631C5FE9FB00AAD586 /* OTMStudentsData.swift */,
@@ -308,6 +327,7 @@
 				BEDCD3641C5FE9FB00AAD586 /* OTMStudentsData.swift in Sources */,
 				BE4345E01C5ABE8D00852B8E /* OTMLogin.swift in Sources */,
 				BEED77661C583E8E005F6FA7 /* OTMClient.swift in Sources */,
+				BEB143961C7EBDDE005FA836 /* OTMFBClient.swift in Sources */,
 				BEED775C1C581688005F6FA7 /* MapViewController.swift in Sources */,
 				BE4B92FF1C5DE6BB00EC9B38 /* KeyboardConfigration.swift in Sources */,
 				BE762E291C753B0A00D35CD7 /* OTMParseClient.swift in Sources */,
@@ -459,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /Users/liyin/Documents/FacebookSDK;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sbdk.OnTheMap;
@@ -470,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /Users/liyin/Documents/FacebookSDK;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sbdk.OnTheMap;

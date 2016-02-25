@@ -111,28 +111,6 @@
                                     <action selector="udacitySignUpButtonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="crw-Jy-6ov"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdv-Uj-q5S">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="u2x-uL-ypp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Sign in with Facebook">
-                                    <color key="titleColor" red="0.99607473611831665" green="0.99220293760299683" blue="0.99199241399765015" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.27177137136459351" green="0.23309719562530518" blue="0.058971837162971497" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="u2x-uL-ypp"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="u2x-uL-ypp"/>
-                                    </mask>
-                                </variation>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VbS-KM-6c1">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -162,6 +140,23 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="OiR-rJ-uG6">
                                 <rect key="frame" x="-10" y="-10" width="20" height="20"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sN1-gx-Kia" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.0" green="0.65100671140939592" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Jyn-Jv-5ih"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Jyn-Jv-5ih"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="Jyn-Jv-5ih"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -192,6 +187,7 @@
                             <constraint firstItem="tSZ-F7-TqF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="OWk-ux-DFW">
                                 <variation key="heightClass=regular" constant="40"/>
                             </constraint>
+                            <constraint firstItem="sN1-gx-Kia" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="PEs-Ym-wGP"/>
                             <constraint firstItem="kjl-JH-MCZ" firstAttribute="top" secondItem="NSh-Fa-Ote" secondAttribute="bottom" constant="8" id="Q9k-RV-pbd">
                                 <variation key="heightClass=regular" constant="10"/>
                             </constraint>
@@ -206,21 +202,17 @@
                             <constraint firstAttribute="trailingMargin" secondItem="kjl-JH-MCZ" secondAttribute="trailing" constant="145" id="WyK-xW-P6d">
                                 <variation key="heightClass=regular" constant="10"/>
                             </constraint>
-                            <constraint firstItem="Hdv-Uj-q5S" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="12" id="acd-xR-rDW">
-                                <variation key="heightClass=regular" constant="5"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sN1-gx-Kia" secondAttribute="bottom" constant="10" id="awk-Ch-yPc">
+                                <variation key="heightClass=regular" constant="20"/>
                             </constraint>
+                            <constraint firstItem="sN1-gx-Kia" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="5" id="f5g-ze-oAZ"/>
                             <constraint firstItem="bYV-hJ-SFd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ft8-PE-Hun"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Hdv-Uj-q5S" secondAttribute="trailing" id="gjL-II-fW6">
-                                <variation key="heightClass=regular" constant="5"/>
-                            </constraint>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Hdv-Uj-q5S" secondAttribute="bottom" constant="35" id="pMW-1x-seX">
-                                <variation key="heightClass=regular" constant="15"/>
-                            </constraint>
-                            <constraint firstItem="Hdv-Uj-q5S" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vNW-2V-h2U"/>
+                            <constraint firstAttribute="trailing" secondItem="sN1-gx-Kia" secondAttribute="trailing" constant="5" id="u2R-tf-p3q"/>
                             <constraint firstItem="tSZ-F7-TqF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wxe-jM-gbE"/>
                             <constraint firstItem="VbS-KM-6c1" firstAttribute="top" secondItem="tSZ-F7-TqF" secondAttribute="bottom" constant="13" id="xII-Lb-QiH">
                                 <variation key="heightClass=regular" constant="20"/>
                             </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="sN1-gx-Kia" secondAttribute="trailing" constant="5" id="yBJ-HK-gke"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -228,13 +220,13 @@
                                 <exclude reference="tSZ-F7-TqF"/>
                                 <exclude reference="NSh-Fa-Ote"/>
                                 <exclude reference="kjl-JH-MCZ"/>
-                                <exclude reference="Hdv-Uj-q5S"/>
                                 <exclude reference="VbS-KM-6c1"/>
                                 <exclude reference="OiR-rJ-uG6"/>
+                                <exclude reference="sN1-gx-Kia"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="pMW-1x-seX"/>
-                                <exclude reference="Bmh-H6-g4c"/>
+                                <exclude reference="OWk-ux-DFW"/>
+                                <exclude reference="wxe-jM-gbE"/>
                                 <exclude reference="URz-63-5dz"/>
                                 <exclude reference="UqG-la-3eo"/>
                                 <exclude reference="Wbc-fT-ZXn"/>
@@ -243,9 +235,7 @@
                                 <exclude reference="GAa-cY-NcN"/>
                                 <exclude reference="KZk-1L-PyX"/>
                                 <exclude reference="ft8-PE-Hun"/>
-                                <exclude reference="acd-xR-rDW"/>
-                                <exclude reference="gjL-II-fW6"/>
-                                <exclude reference="vNW-2V-h2U"/>
+                                <exclude reference="Bmh-H6-g4c"/>
                                 <exclude reference="4b2-W8-7ec"/>
                                 <exclude reference="5Mb-h9-KWL"/>
                                 <exclude reference="9om-eD-hEW"/>
@@ -255,8 +245,11 @@
                                 <exclude reference="JNG-fz-t1B"/>
                                 <exclude reference="Q9k-RV-pbd"/>
                                 <exclude reference="WyK-xW-P6d"/>
-                                <exclude reference="OWk-ux-DFW"/>
-                                <exclude reference="wxe-jM-gbE"/>
+                                <exclude reference="PEs-Ym-wGP"/>
+                                <exclude reference="f5g-ze-oAZ"/>
+                                <exclude reference="u2R-tf-p3q"/>
+                                <exclude reference="yBJ-HK-gke"/>
+                                <exclude reference="awk-Ch-yPc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -265,13 +258,13 @@
                                 <include reference="tSZ-F7-TqF"/>
                                 <include reference="NSh-Fa-Ote"/>
                                 <include reference="kjl-JH-MCZ"/>
-                                <include reference="Hdv-Uj-q5S"/>
                                 <include reference="VbS-KM-6c1"/>
                                 <include reference="OiR-rJ-uG6"/>
+                                <include reference="sN1-gx-Kia"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="pMW-1x-seX"/>
-                                <include reference="Bmh-H6-g4c"/>
+                                <include reference="OWk-ux-DFW"/>
+                                <include reference="wxe-jM-gbE"/>
                                 <include reference="URz-63-5dz"/>
                                 <include reference="UqG-la-3eo"/>
                                 <include reference="Wbc-fT-ZXn"/>
@@ -280,9 +273,7 @@
                                 <include reference="GAa-cY-NcN"/>
                                 <include reference="KZk-1L-PyX"/>
                                 <include reference="ft8-PE-Hun"/>
-                                <include reference="acd-xR-rDW"/>
-                                <include reference="gjL-II-fW6"/>
-                                <include reference="vNW-2V-h2U"/>
+                                <include reference="Bmh-H6-g4c"/>
                                 <include reference="4b2-W8-7ec"/>
                                 <include reference="5Mb-h9-KWL"/>
                                 <include reference="9om-eD-hEW"/>
@@ -292,15 +283,18 @@
                                 <include reference="JNG-fz-t1B"/>
                                 <include reference="Q9k-RV-pbd"/>
                                 <include reference="WyK-xW-P6d"/>
-                                <include reference="OWk-ux-DFW"/>
-                                <include reference="wxe-jM-gbE"/>
+                                <include reference="PEs-Ym-wGP"/>
+                                <exclude reference="f5g-ze-oAZ"/>
+                                <exclude reference="u2R-tf-p3q"/>
+                                <include reference="yBJ-HK-gke"/>
+                                <include reference="awk-Ch-yPc"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="FBLoginButton" destination="sN1-gx-Kia" id="Vuc-RE-YyY"/>
                         <outlet property="emailTextField" destination="VbS-KM-6c1" id="T9o-d6-C4h"/>
-                        <outlet property="facebookLoginButton" destination="Hdv-Uj-q5S" id="8Wo-m1-g3B"/>
                         <outlet property="loginActivityIndicatorView" destination="OiR-rJ-uG6" id="7bb-WF-lZi"/>
                         <outlet property="loginButton" destination="NSh-Fa-Ote" id="TIU-WD-OpJ"/>
                         <outlet property="passwordTextField" destination="bYV-hJ-SFd" id="f4i-KY-Ekd"/>

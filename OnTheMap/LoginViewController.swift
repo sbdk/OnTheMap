@@ -8,14 +8,16 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
+import FBSDKCoreKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var facebookLoginButton: UIButton!
     @IBOutlet weak var loginActivityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var FBLoginButton: FBSDKLoginButton!
 
     
     var session: NSURLSession!
@@ -35,7 +37,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         loginActivityIndicatorView.hidden = true
         loginActivityIndicatorView.hidesWhenStopped = true
-        facebookLoginButton.hidden = true
+        
         
         //subscribeToKeyboarNotifications()
         self.addKeyboardDismissRecognizer()
@@ -59,6 +61,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         prepareTextField(passwordTextField)
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer?.numberOfTapsRequired = 1
+        
+        if FBSDKAccessToken.currentAccessToken() == nil {
+            
+            print("Facebook not logged in")
+            
+        } else {
+            
+            print("Facebook already logged in")
+        }
+        
+        FBLoginButton.delegate = self
+        FBLoginButton.readPermissions = ["public_profile","email","user_friends"]
     }
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
@@ -102,6 +116,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         app.openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
     }
     
+    
+    
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
         
@@ -109,6 +125,43 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.presentViewController(controller, animated: true, completion: nil)
         })
     }
+    
+    
+    //FBSDKLoginButtonDelegate implementation
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        
+        if(error != nil){
+            print(error.localizedDescription)
+            OTMClient.sharedInstance().presentAlertView(error.localizedDescription, hostView: self)
+            return
+        }
+        
+        if let userToken = result.token {
+            
+            OTMClient.sharedInstance().FBAccessToken = FBSDKAccessToken.currentAccessToken().tokenString
+            print("Token = \(FBSDKAccessToken.currentAccessToken().tokenString)")
+            print("User ID = \(FBSDKAccessToken.currentAccessToken().userID)")
+            
+            OTMClient.sharedInstance().loginWithFacebookCredential(OTMClient.sharedInstance().FBAccessToken){(success, errorString) in
+                
+                if success {
+                    
+                    self.completeLogin()
+                    
+                } else {
+                    
+                    OTMClient.sharedInstance().presentAlertView(errorString!, hostView: self)
+                }
+                
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("User logged out")
+    }
+    
+    
 }
 
 

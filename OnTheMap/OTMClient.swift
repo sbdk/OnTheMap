@@ -24,6 +24,7 @@ class OTMClient: NSObject {
     var udacityUserMediaURL: String? = nil
     var parseObjectId: String? = nil
     var usedObjectID = [String]()
+    var FBAccessToken: String? = nil
     
     override init() {
         session = NSURLSession.sharedSession()
